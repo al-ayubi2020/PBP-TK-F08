@@ -1,7 +1,7 @@
 # Rancangan Proyek Tengah Semester
 ## Kelompok F-08 — PBP F
  
-### 🔗 _[Tautan Aplikasi Heroku](https://pbp-f08-bank-sampah.herokuapp.com/)_
+### 🔗 _[Tautan Aplikasi Heroku](https://pbp-tk-f08.herokuapp.com/)_
 
 ### Anggota Kelompok
 * Aghniya Zhafira Urfa - 2106654164

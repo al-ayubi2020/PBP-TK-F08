@@ -17,7 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('example_app.urls')),
+    path('secret/', admin.site.urls),
+    path('', include('landing_page.urls')),
+    path('dashboard/', include('user_dashboard.urls')),
+    path('dashboard/prize', include('prize.urls')),
+    path('dashboard/withdraw', include('withdraw.urls')),
+    path('dashboard/deposit', include('deposit.urls')),
+    path('admin/', include('admin_page.urls')),
     path("__reload__/", include("django_browser_reload.urls")),
 ]

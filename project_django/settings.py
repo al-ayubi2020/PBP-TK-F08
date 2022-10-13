@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'withdraw',
     'prize',
     'landing_page',
-    'admin_page'
+    'admin_page',
+    'user_dashboard'
 ]
 
 TAILWIND_APP_NAME = 'theme'

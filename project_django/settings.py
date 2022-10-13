@@ -43,6 +43,11 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'django_browser_reload',
+    'deposit',
+    'withdraw',
+    'prize',
+    'landing_page',
+    'admin_page'
 ]
 
 TAILWIND_APP_NAME = 'theme'

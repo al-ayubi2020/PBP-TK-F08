@@ -2,7 +2,7 @@
 ## Kelompok F-08 — PBP F
 ## Nama Applikasi : Trashsure
  
-### 🔗 _[Tautan Aplikasi Heroku](https://trashsurebank.herokuapp.com/)_
+### 🔗 _[Tautan Aplikasi Heroku](https://trash-sure.herokuapp.com/)_
 
 ### Anggota Kelompok
 * Aghniya Zhafira Urfa - 2106654164

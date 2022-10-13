@@ -1,5 +1,6 @@
 # Rancangan Proyek Tengah Semester
 ## Kelompok F-08 — PBP F
+## Nama Applikasi : Trashsure
  
 ### 🔗 _[Tautan Aplikasi Heroku](https://pbp-tk-f08.herokuapp.com/)_
 
@@ -17,11 +18,11 @@
 
 ### Daftar Modul yang Akan Diimplementasikan
 Fitur-fitur aplikasi Bank Sampah:
-1. Landing Page and Auth
-2. Admin Dashboard
-3. Add and History Deposit on User Dashboard
-4. Point Redemption on User Dashboard
-5. Add and History Withdraw on User Dashboard
+1. Landing Page and Auth (Andresha Pradana)
+2. Admin Dashboard (Muhammad Hilman Al Ayubi)
+3. Add and History Deposit on User Dashboard (Aghniya Zhafira Urfa)
+4. Point Redemption on User Dashboard (Trisno Bayu Pamungkas)
+5. Add and History Withdraw on User Dashboard (Dhina Rotua Mutiara)
 
 ### Role Pengguna dan Deskripsinya
 * **Admin:** Admin dapat menambahkan transaksi setoran bank sampah kepada user, serta menerima dan menolak permintaan withdraw.

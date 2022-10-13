@@ -17,14 +17,11 @@
 
 ### Daftar Modul yang Akan Diimplementasikan
 Fitur-fitur aplikasi Bank Sampah:
-1. Landing Page
-2. User
-3. Auth
-4. Home Page
-5. Admin Page
-6. Transaction History
-7. Pending Withdraw
-8. Accepted Withdraw
+1. Landing Page and Auth
+2. Admin Dashboard
+3. Add and History Deposit on User Dashboard
+4. Point Redemption on User Dashboard
+5. Add and History Withdraw on User Dashboard
 
 ### Role Pengguna dan Deskripsinya
 * **Admin:** Admin dapat menambahkan transaksi setoran bank sampah kepada user, serta menerima dan menolak permintaan withdraw.

@@ -28,7 +28,7 @@ def register(request):
                     acc.set_password(password)
                     acc.save()
                     messages.success(request, 'Akun telah berhasil dibuat!')
-                    return redirect('todolist:login')
+                    return redirect('landing_page:login')
                 else:
                     messages.success(request, 'Terjadi masalah!')
             except:

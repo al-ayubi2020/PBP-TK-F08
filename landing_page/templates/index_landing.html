@@ -16,4 +16,8 @@
   <h1 class="text-red-500 text-4xl">Hello, Landing!</h1>
   <h3>This is example app for Django template</h3>
 </div>
+<!-- prettier-ignore -->
+{% if isLogin %}
+{% include 'landingBottomNav.html' %}
+{% endif %}
 {% endblock content %}

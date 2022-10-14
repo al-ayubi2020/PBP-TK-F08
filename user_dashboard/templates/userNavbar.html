@@ -2,7 +2,7 @@
   <div class="flex-1">
     <a
       class="btn btn-ghost normal-case text-xl"
-      href="{% url 'user_dashboard:index' %}"
+      href="{% url 'landing_page:index' %}"
       >TrashSure</a
     >
   </div>
@@ -30,7 +30,7 @@
           </a>
         </li>
         <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
+        <li><a href="{% url 'landing_page:logout' %}">Logout</a></li>
       </ul>
     </div>
   </div>

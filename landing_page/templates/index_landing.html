@@ -6,7 +6,11 @@
 <!-- prettier-ignore -->
 {% endblock meta %} 
 {% block content %}
+{% if isLogin %}
+{% include 'userNavbar.html' %}
+{% else %}
 {% include 'navbar.html' %}
+{% endif %}
 {% include 'loginModal.html' %}
 <div class="min-h-screen">
   <h1 class="text-red-500 text-4xl">Hello, Landing!</h1>

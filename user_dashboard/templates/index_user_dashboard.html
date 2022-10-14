@@ -6,6 +6,11 @@
 <!-- prettier-ignore -->
 {% endblock meta %} 
 {% block content %}
-<h1 class="text-green-500 text-4xl">Hello, user dashboard!</h1>
-<h3>This is example app for Django template</h3>
+{% include 'userNavbar.html' %}
+<div class="min-h-screen">
+  <h1 class="text-green-500 text-4xl">Hello, user dashboard!</h1>
+  <h3>This is example app for Django template</h3>
+</div>
+<!-- prettier-ignore -->
+{% include 'dashboardBottomNav.html' %} 
 {% endblock content %}

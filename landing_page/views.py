@@ -13,6 +13,9 @@ import datetime
 from rolepermissions.roles import assign_role, get_user_roles
 from project_django.roles import commonUser
 
+def forbiden(request):
+    return render(request, 'forbiden.html')
+
 def index(request):
     isLogin = str(request.user)
     user = request.user
@@ -53,8 +56,7 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user) 
-            response = HttpResponseRedirect(reverse("user_dashboard:index")) 
-            return response
+            return HttpResponseRedirect(reverse("user_dashboard:index")) 
         else:
             messages.info(request, 'Username atau Password salah!')
     context = {}

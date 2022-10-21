@@ -951,6 +951,10 @@ select {
   max-width: 24rem;
 }
 
+.max-w-md {
+  max-width: 28rem;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -1145,6 +1149,10 @@ select {
 .bg-\[\#B6C790\] {
   --tw-bg-opacity: 1;
   background-color: rgb(182 199 144 / var(--tw-bg-opacity));
+}
+
+.bg-opacity-60 {
+  --tw-bg-opacity: 0.6;
 }
 
 .bg-gradient-to-bl {

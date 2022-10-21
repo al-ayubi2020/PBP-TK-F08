@@ -10,11 +10,16 @@ from django.contrib.auth.models import User
 from django.http.response import JsonResponse
 import datetime
 
+from rolepermissions.roles import assign_role, get_user_roles
+from project_django.roles import commonUser
+
 def index(request):
     isLogin = str(request.user)
+    user = request.user
+    role = get_user_roles(user)
     if (isLogin == 'AnonymousUser'):
         return render(request, 'index_landing.html', {'isLogin': False})
-    return render(request, 'index_landing.html', {'isLogin': True})
+    return render(request, 'index_landing.html', {'isLogin': True, 'role':role})
 
 def register(request):
     if request.method == "POST":
@@ -27,6 +32,7 @@ def register(request):
                 if acc:
                     acc.set_password(password)
                     acc.save()
+                    assign_role(acc, commonUser)
                     messages.success(request, 'Akun telah berhasil dibuat!')
                     return redirect('landing_page:login')
                 else:
@@ -54,7 +60,7 @@ def login_user(request):
     context = {}
     return render(request, "login.html", context)
 
-@login_required(login_url='/todolist/login/')
+@login_required(login_url='/login/')
 def logout_user(request):
     logout(request)
     response = HttpResponseRedirect(reverse('landing_page:index'))

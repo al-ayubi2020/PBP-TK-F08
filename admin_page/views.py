@@ -43,16 +43,6 @@ def index_prize(request):
     if (has_role(user, superUser)):
         return render(request, 'index_prize_admin.html', {'isLogin': True, 'role':role})
     return redirect('/admin/login/')
-    
-
-def index_withdraw(request):
-    isLogin = str(request.user)
-    user = request.user
-    role = get_user_roles(user)
-    if (has_role(user, superUser)):
-        return render(request, 'index_withdraw_admin.html', {'isLogin': True, 'role':role})
-    return redirect('/admin/login/')
-    
 
 def register(request):
     if request.method == "POST":

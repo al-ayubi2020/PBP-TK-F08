@@ -1,0 +1,37 @@
+<div class="navbar bg-base-100 drop-shadow-lg sticky top-0">
+  <div class="flex-1">
+    <a
+      class="btn btn-ghost normal-case text-xl"
+      href="{% url 'admin_page:index' %}"
+      >TrashSure</a
+    >
+  </div>
+  <div class="flex-none gap-2">
+    <ul class="menu menu-horizontal p-0 hidden sm:flex">
+      <li><a href="{% url 'user_dashboard:index' %}">Home</a></li>
+      <li><a href="{% url 'deposit:index' %}">Deposit</a></li>
+      <li><a href="{% url 'prize:index' %}">Redeem Point</a></li>
+      <li><a href="{% url 'withdraw:index' %}">Withdraw</a></li>
+    </ul>
+    <div class="dropdown dropdown-end">
+      <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+        <div class="w-10 rounded-full">
+          <img src="https://placeimg.com/80/80/people" />
+        </div>
+      </label>
+      <ul
+        tabindex="0"
+        class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+      >
+        <li>
+          <a class="justify-between">
+            Profile
+            <span class="badge">New</span>
+          </a>
+        </li>
+        <li><a>Settings</a></li>
+        <li><a href="{% url 'landing_page:logout' %}">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

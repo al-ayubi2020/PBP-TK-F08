@@ -18,9 +18,27 @@ def index(request):
     isLogin = str(request.user)
     user = request.user
     role = get_user_roles(user)
-    if (isLogin == 'AnonymousUser'):
-        return render(request, 'index_admin.html', {'isLogin': False})
     return render(request, 'index_admin.html', {'isLogin': True, 'role':role})
+
+@login_required(login_url='/admin/login/')
+def index_deposit(request):
+    isLogin = str(request.user)
+    user = request.user
+    role = get_user_roles(user)
+    return render(request, 'index_deposit_admin.html', {'isLogin': True, 'role':role})
+
+@login_required(login_url='/admin/login/')
+def index_prize(request):
+    isLogin = str(request.user)
+    user = request.user
+    role = get_user_roles(user)
+    return render(request, 'index_prize_admin.html', {'isLogin': True, 'role':role})
+
+def index_withdraw(request):
+    isLogin = str(request.user)
+    user = request.user
+    role = get_user_roles(user)
+    return render(request, 'index_withdraw_admin.html', {'isLogin': True, 'role':role})
 
 def register(request):
     if request.method == "POST":

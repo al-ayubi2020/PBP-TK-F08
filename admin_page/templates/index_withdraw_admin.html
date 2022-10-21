@@ -2,15 +2,17 @@
 {% extends 'base.html' %} 
 {% load static %} 
 {% block meta %}
-<title>Hello, user dashboard!</title>
+<title>Hello, withdraw!</title>
 <!-- prettier-ignore -->
 {% endblock meta %} 
 {% block content %}
 {% include 'adminNavbar.html' %}
-<div class="min-h-screen">
-  <h1 class="text-green-500 text-4xl">Hello, admin dashboard!</h1>
+<div>
+  <!-- bikin konten disini -->
+  <h1 class="text-green-500 text-4xl">Hello,Admin withdraw!</h1>
   <h3>This is example app for Django template</h3>
+  <!-- akhir konten -->
 </div>
 <!-- prettier-ignore -->
-{% include 'dashboardBottomNavAdmin.html' %} 
+{% include 'withdrawBottomNavAdmin.html' %} 
 {% endblock content %}

@@ -12,7 +12,7 @@
     <div class="hero-content flex-col lg:flex-row">
       <img src="{% static 'bin.png' %}" />
       <div>
-        <h1 class="text-5xl font-bold">Box Office News!</h1>
+        <h1 class="text-5xl font-bold">Hi, {{ username }}!</h1>
         <p class="py-6">
           Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
           excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a
@@ -24,7 +24,7 @@
           >
             <div class="card-body">
               <h2 class="card-title">Saldo</h2>
-              <p class="font-bold">0</p>
+              <p class="font-bold">{{ balance }}</p>
             </div>
           </div>
           <div
@@ -32,7 +32,7 @@
           >
             <div class="card-body">
               <h2 class="card-title">Poin</h2>
-              <p class="font-bold">0</p>
+              <p class="font-bold">{{ poin }}</p>
             </div>
           </div>
         </div>

@@ -4,5 +4,5 @@ from django.contrib.auth.models import User
 
 class UserData(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    poin = models.IntegerField()
-    balance = models.IntegerField()
+    poin = models.IntegerField(default=0)
+    balance = models.IntegerField(default=0)

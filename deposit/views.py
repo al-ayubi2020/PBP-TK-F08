@@ -4,11 +4,61 @@ from rolepermissions.decorators import has_role_decorator
 from project_django.roles import commonUser
 from rolepermissions.roles import assign_role, get_user_roles
 from rolepermissions.checkers import has_role
+from django.http.response import JsonResponse
+from django.core import serializers
+from django.urls import reverse
+from django.http import HttpResponse, HttpResponseRedirect
+import math
+
+from .models import PendingDeposit
+from admin_page.models import Deposit
 
 @login_required(login_url='/login/')
 def index(request):
     user = request.user
     role = get_user_roles(user)
     if (has_role(user, commonUser)):
+        
         return render(request, 'index_deposit.html')
+    return redirect('/login/')
+
+@login_required(login_url='/login/')
+def getPending(request):
+    user = request.user
+    role = get_user_roles(user)
+    if (has_role(user, commonUser)):
+        pending = PendingDeposit.objects.filter(user=user).order_by('-pk')
+        return HttpResponse(serializers.serialize("json", pending), content_type="application/json")
+    return redirect('/login/')
+
+@login_required(login_url='/login/')
+def getDeposit(request):
+    user = request.user
+    role = get_user_roles(user)
+    if (has_role(user, commonUser)):
+        deposit = Deposit.objects.filter(user=user).order_by('-pk')
+        return HttpResponse(serializers.serialize("json", deposit), content_type="application/json")
+    return redirect('/login/')
+
+@login_required(login_url='/login/')
+def add(request):
+    user = request.user
+    role = get_user_roles(user)
+    if has_role(user, commonUser):
+        if request.method == 'POST':
+            HARGA_PLASTIK = 10000
+            HARGA_ELEKTRONIK = 12000
+            user = request.user
+            jenisSampah = request.POST.get('jenisSampah')
+            beratSampah = int(request.POST.get('beratSampah'))
+            totalHarga = 0
+            if jenisSampah == "PLASTIK":
+                totalHarga = beratSampah * HARGA_PLASTIK
+            elif jenisSampah == "ELEKTRONIK":
+                totalHarga = beratSampah * HARGA_ELEKTRONIK
+            poin = totalHarga // 1000
+            deposit = PendingDeposit(beratSampah=beratSampah, jenisSampah=jenisSampah, totalHarga=totalHarga, poin=poin, user=user, username=user.username)
+            deposit.save()
+            return JsonResponse({"instance": "Deposit Diajukan"}, status=200) 
+        return redirect('deposit:index')
     return redirect('/login/')

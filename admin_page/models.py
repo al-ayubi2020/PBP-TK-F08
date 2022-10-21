@@ -7,8 +7,8 @@ from datetime import datetime
 
 class Prize(models.Model):
     nama = models.TextField()
-    poin = models.IntegerField()
-    stok = models.IntegerField()
+    poin = models.BigIntegerField()
+    stok = models.BigIntegerField()
 
 class Withdraw(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -19,9 +19,10 @@ class Withdraw(models.Model):
 class Deposit(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(default=datetime.now)
+    username = models.TextField(default='')
     jenisSampah = models.TextField()
-    beratSampah = models.IntegerField()
-    poin = models.IntegerField()
-    totalHarga = models.IntegerField()
+    beratSampah = models.BigIntegerField()
+    poin = models.BigIntegerField()
+    totalHarga = models.BigIntegerField()
     isApprove = models.TextField()
 

@@ -16,6 +16,10 @@ from rolepermissions.decorators import has_role_decorator
 from project_django.roles import superUser
 from rolepermissions.checkers import has_role
 
+from deposit.models import PendingDeposit
+from .models import Deposit
+from landing_page.models import UserData
+
 @login_required(login_url='/admin/login/')
 def index(request):
     isLogin = str(request.user)
@@ -33,7 +37,37 @@ def index_deposit(request):
     if (has_role(user, superUser)):
         return render(request, 'index_deposit_admin.html', {'isLogin': True, 'role':role})
     return redirect('/admin/login/')
-    
+
+
+@login_required(login_url='/admin/login/')
+def get_deposit(request):
+    isLogin = str(request.user)
+    user = request.user
+    role = get_user_roles(user)
+    if (has_role(user, superUser)):
+        pending = PendingDeposit.objects.all().order_by('-pk')
+        return HttpResponse(serializers.serialize("json", pending), content_type="application/json")
+    return redirect('/admin/login/')
+
+@login_required(login_url='/admin/login/')
+def acc_deposit(request, id):
+    isLogin = str(request.user)
+    user = request.user
+    role = get_user_roles(user)
+    if (has_role(user, superUser)):
+        if request.method == 'POST':
+            pending = PendingDeposit.objects.get(pk=id)
+            userNow = User.objects.get(pk=pending.user.id)
+            deposit = Deposit(date=pending.date, user=userNow, beratSampah=pending.beratSampah, jenisSampah=pending.jenisSampah, poin=pending.poin, totalHarga=pending.totalHarga, username=userNow.username, isApprove="DITERIMA")
+            deposit.save()
+            userdata = UserData.objects.get(user=userNow)
+            userdata.balance += pending.totalHarga
+            userdata.poin += pending.poin
+            userdata.save()
+            pending.delete()
+            return JsonResponse({"instance": "Deposit Diterima"}, status=200) 
+        return redirect('admin_page:deposit')
+    return redirect('/admin/login/')
 
 @login_required(login_url='/admin/login/')
 def index_prize(request):

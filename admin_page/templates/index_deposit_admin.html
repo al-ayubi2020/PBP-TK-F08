@@ -3,6 +3,132 @@
 {% load static %} 
 {% block meta %}
 <title>Hello, Deposit!</title>
+<script>
+  function show(data) {
+    tab = ``;
+
+    for (let r of data) {
+      tab += `
+      <div
+  class="card w-full md:w-80 lg:w-96 bg-[#B6C790] hover:bg-[#B6C790] text-black glass"
+>
+  <div class="card-body">
+    <h2 class="card-title">${r.fields.date}</h2>
+    <p class="font-bold">Username: ${r.fields.username}</p>
+    <div class="flex w-fit gap-2">
+      <p class="font-bold w-fit">${r.fields.jenisSampah}</p>
+      <p class="font-bold w-fit">${r.fields.beratSampah} Kg</p>
+    </div>
+    <p class="font-bold">Poin: ${r.fields.poin}</p>
+    <p class="font-bold">Saldo: ${r.fields.totalHarga}</p>
+    <div class="card-actions justify-end">
+      <button class="btn btn-success btn-circle" onclick={accData(${r.pk})}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4.5 12.75l6 6 9-13.5"
+          />
+        </svg>
+      </button>
+      <button class="btn btn-error btn-circle">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+    `;
+    }
+
+    console.log("show");
+    document.getElementById("table").innerHTML = tab;
+  }
+
+  function loadData() {
+    $.get("{% url 'admin_page:get_deposit' %}", function (data) {
+      show(data);
+    });
+  }
+
+  $(document).ready(function () {
+    loadData();
+  });
+
+  $(document).on("submit", "#buatproject", function (e) {
+    e.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: "{% url 'deposit:add' %}",
+      data: {
+        jenisSampah: $("#jenisSampah").val(),
+        beratSampah: $("#beratSampah").val(),
+        csrfmiddlewaretoken: "{{ csrf_token }}",
+      },
+      dataType: "json",
+      success: function (data) {
+        loadData();
+        document.getElementById("jenisSampah").value = "";
+        document.getElementById("beratSampah").value = "";
+        console.log(data);
+        $.toast({
+          text: "Deposit Berhasil Diajukan",
+          showHideTransition: "fade", // It can be plain, fade or slide
+          bgColor: "#23B65D", // Background color for toast
+          textColor: "#eee", // text color
+          allowToastClose: false, // Show the close button or not
+          hideAfter: 2000, // `false` to make it sticky or time in miliseconds to hide after
+          stack: 5, // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
+          textAlign: "left", // Alignment of text i.e. left, right, center
+          position: "bottom-right", // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
+        });
+      },
+    });
+  });
+
+  function accData(id) {
+    $.ajax({
+      type: "POST",
+      url: `acc/${id}`,
+      data: { csrfmiddlewaretoken: "{{ csrf_token }}" },
+      dataType: "json",
+      success: function () {
+        loadData();
+        $.toast({
+          text: "Task Diterima",
+          showHideTransition: "fade", // It can be plain, fade or slide
+          bgColor: "#E01A31", // Background color for toast
+          textColor: "#eee", // text color
+          allowToastClose: false, // Show the close button or not
+          hideAfter: 2000, // `false` to make it sticky or time in miliseconds to hide after
+          stack: 5, // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
+          textAlign: "left", // Alignment of text i.e. left, right, center
+          position: "bottom-right", // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
+        });
+      },
+    });
+  }
+</script>
 <!-- prettier-ignore -->
 {% endblock meta %} 
 {% block content %}
@@ -21,248 +147,8 @@
   </div>
   <div
     class="px-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 place-items-center gap-5 pb-32 md:pb-5"
-  >
-    <div
-      class="card w-full md:w-80 lg:w-96 bg-[#B6C790] hover:bg-[#B6C790] text-black glass"
-    >
-      <div class="card-body">
-        <h2 class="card-title">Tanggal</h2>
-        <p class="font-bold">user</p>
-        <div class="flex w-fit gap-3">
-          <p class="font-bold w-fit">Jenis</p>
-          <p class="font-bold w-fit">Berat Sampah</p>
-        </div>
-        <p class="font-bold">Poin</p>
-        <p class="font-bold">Saldo</p>
-        <div class="card-actions justify-end">
-          <button class="btn btn-success btn-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M4.5 12.75l6 6 9-13.5"
-              />
-            </svg>
-          </button>
-          <button class="btn btn-error btn-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div
-      class="card w-full md:w-80 lg:w-96 bg-[#B6C790] hover:bg-[#B6C790] text-black glass"
-    >
-      <div class="card-body">
-        <h2 class="card-title">Tanggal</h2>
-        <p class="font-bold">user</p>
-        <div class="flex w-fit gap-3">
-          <p class="font-bold w-fit">Jenis</p>
-          <p class="font-bold w-fit">Berat Sampah</p>
-        </div>
-        <p class="font-bold">Poin</p>
-        <p class="font-bold">Saldo</p>
-        <div class="card-actions justify-end">
-          <button class="btn btn-success btn-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M4.5 12.75l6 6 9-13.5"
-              />
-            </svg>
-          </button>
-          <button class="btn btn-error btn-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div
-      class="card w-full md:w-80 lg:w-96 bg-[#B6C790] hover:bg-[#B6C790] text-black glass"
-    >
-      <div class="card-body">
-        <h2 class="card-title">Tanggal</h2>
-        <p class="font-bold">user</p>
-        <div class="flex w-fit gap-3">
-          <p class="font-bold w-fit">Jenis</p>
-          <p class="font-bold w-fit">Berat Sampah</p>
-        </div>
-        <p class="font-bold">Poin</p>
-        <p class="font-bold">Saldo</p>
-        <div class="card-actions justify-end">
-          <button class="btn btn-success btn-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M4.5 12.75l6 6 9-13.5"
-              />
-            </svg>
-          </button>
-          <button class="btn btn-error btn-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div
-      class="card w-full md:w-80 lg:w-96 bg-[#B6C790] hover:bg-[#B6C790] text-black glass"
-    >
-      <div class="card-body">
-        <h2 class="card-title">Tanggal</h2>
-        <p class="font-bold">user</p>
-        <div class="flex w-fit gap-3">
-          <p class="font-bold w-fit">Jenis</p>
-          <p class="font-bold w-fit">Berat Sampah</p>
-        </div>
-        <p class="font-bold">Poin</p>
-        <p class="font-bold">Saldo</p>
-        <div class="card-actions justify-end">
-          <button class="btn btn-success btn-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M4.5 12.75l6 6 9-13.5"
-              />
-            </svg>
-          </button>
-          <button class="btn btn-error btn-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div
-      class="card w-full md:w-80 lg:w-96 bg-[#B6C790] hover:bg-[#B6C790] text-black glass"
-    >
-      <div class="card-body">
-        <h2 class="card-title">Tanggal</h2>
-        <p class="font-bold">user</p>
-        <div class="flex w-fit gap-3">
-          <p class="font-bold w-fit">Jenis</p>
-          <p class="font-bold w-fit">Berat Sampah</p>
-        </div>
-        <p class="font-bold">Poin</p>
-        <p class="font-bold">Saldo</p>
-        <div class="card-actions justify-end">
-          <button class="btn btn-success btn-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M4.5 12.75l6 6 9-13.5"
-              />
-            </svg>
-          </button>
-          <button class="btn btn-error btn-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+    id="table"
+  ></div>
   <!-- akhir konten -->
 </div>
 <!-- prettier-ignore -->

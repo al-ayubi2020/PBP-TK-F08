@@ -7,5 +7,5 @@ from datetime import datetime
 class PendingWithdraw(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(default=datetime.now)
-    jumlah = models.TextField()
+    jumlah = models.BigIntegerField()
     isApprove = models.TextField(default="PENDING")

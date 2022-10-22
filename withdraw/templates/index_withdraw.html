@@ -3,6 +3,82 @@
 {% load static %} 
 {% block meta %}
 <title>Hello, withdraw!</title>
+
+<script>
+  function show(data) {
+    tab = ``;
+
+    for (let r of data) {
+      tab += `
+      <div
+  class="card w-full md:w-80 lg:w-96 bg-[#7E93BE] hover:bg-[#7E93BE] text-black glass"
+>
+  <div class="card-body">
+    <h2 class="card-title">${r.fields.date}</h2>
+    <p class="font-bold">${r.fields.jumlah}</p>
+  </div>
+</div>
+
+    `;
+    }
+
+    console.log("show");
+    document.getElementById("table").innerHTML = tab;
+  }
+
+  function loadData() {
+    $.get("{% url 'withdraw:get' %}", function (data) {
+      show(data);
+    });
+  }
+
+  $(document).ready(function () {
+    loadData();
+  });
+
+  $(document).on("submit", "#buatproject", function (e) {
+    e.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: "{% url 'withdraw:add' %}",
+      data: {
+        jumlah: $("#jumlah").val(),
+        csrfmiddlewaretoken: "{{ csrf_token }}",
+      },
+      dataType: "json",
+      success: function (data) {
+        loadData();
+        document.getElementById("jumlah").value = "";
+        console.log(data.instance);
+        if (data.instance == "Saldo Kurang") {
+          $.toast({
+            text: "Saldo Kurang",
+            showHideTransition: "fade", // It can be plain, fade or slide
+            bgColor: "#FF0000", // Background color for toast
+            textColor: "#eee", // text color
+            allowToastClose: false, // Show the close button or not
+            hideAfter: 2000, // `false` to make it sticky or time in miliseconds to hide after
+            stack: 5, // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
+            textAlign: "left", // Alignment of text i.e. left, right, center
+            position: "bottom-right", // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
+          });
+        } else {
+          $.toast({
+            text: "Berhasil Ditarik",
+            showHideTransition: "fade", // It can be plain, fade or slide
+            bgColor: "#23B65D", // Background color for toast
+            textColor: "#eee", // text color
+            allowToastClose: false, // Show the close button or not
+            hideAfter: 2000, // `false` to make it sticky or time in miliseconds to hide after
+            stack: 5, // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
+            textAlign: "left", // Alignment of text i.e. left, right, center
+            position: "bottom-right", // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
+          });
+        }
+      },
+    });
+  });
+</script>
 <!-- prettier-ignore -->
 {% endblock meta %} 
 {% block content %}
@@ -16,55 +92,56 @@
     <button
       class="btn btn-wide bg-[#F0F1AB] glass hover:bg-[#F0F1AB] text-black"
     >
-      Add
+      <label
+        for="my-modal-4"
+        class="w-full h-full flex items-center justify-center"
+        >Add</label
+      >
     </button>
   </div>
   <div
     class="px-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 place-items-center gap-5 pb-32 md:pb-5"
-  >
-    <div
-      class="card w-full md:w-80 lg:w-96 bg-[#7E93BE] hover:bg-[#7E93BE] text-black glass"
-    >
-      <div class="card-body">
-        <h2 class="card-title">Tanggal</h2>
-        <p class="font-bold">Saldo</p>
-      </div>
-    </div>
-    <div
-      class="card w-full md:w-80 lg:w-96 bg-[#7E93BE] hover:bg-[#7E93BE] text-black glass"
-    >
-      <div class="card-body">
-        <h2 class="card-title">Tanggal</h2>
-        <p class="font-bold">Saldo</p>
-      </div>
-    </div>
-    <div
-      class="card w-full md:w-80 lg:w-96 bg-[#7E93BE] hover:bg-[#7E93BE] text-black glass"
-    >
-      <div class="card-body">
-        <h2 class="card-title">Tanggal</h2>
-        <p class="font-bold">Saldo</p>
-      </div>
-    </div>
-    <div
-      class="card w-full md:w-80 lg:w-96 bg-[#7E93BE] hover:bg-[#7E93BE] text-black glass"
-    >
-      <div class="card-body">
-        <h2 class="card-title">Tanggal</h2>
-        <p class="font-bold">Saldo</p>
-      </div>
-    </div>
-    <div
-      class="card w-full md:w-80 lg:w-96 bg-[#7E93BE] hover:bg-[#7E93BE] text-black glass"
-    >
-      <div class="card-body">
-        <h2 class="card-title">Tanggal</h2>
-        <p class="font-bold">Saldo</p>
-      </div>
-    </div>
-  </div>
+    id="table"
+  ></div>
   <!-- akhir konten -->
 </div>
+
+<input type="checkbox" id="my-modal-4" class="modal-toggle" />
+<label for="my-modal-4" class="modal cursor-pointer">
+  <label class="modal-box relative" for="">
+    <label for="my-modal-4" class="btn btn-sm btn-circle absolute right-2 top-2"
+      >✕</label
+    >
+    <h3 class="text-lg font-bold">Tarik Saldo</h3>
+    <form action="" id="buatproject" for="my-modal-4">
+      {% csrf_token %}
+      <div class="form-control w-full my-5">
+        <label class="label">
+          <span class="label-text">Jumlah Penarikan</span>
+        </label>
+        <input
+          type="number"
+          placeholder="Rupiah"
+          class="input input-bordered w-full"
+          id="jumlah"
+        />
+      </div>
+      <div class="w-full flex justify-end">
+        <button
+          class="btn btn-active btn-primary modal-action"
+          type="submit"
+          id="button"
+        >
+          <label
+            for="my-modal-4"
+            class="w-full h-full flex items-center justify-center cursor-pointer"
+            >Submit</label
+          >
+        </button>
+      </div>
+    </form>
+  </label>
+</label>
 <!-- prettier-ignore -->
 {% include 'withdrawBottomNav.html' %} 
 {% endblock content %}

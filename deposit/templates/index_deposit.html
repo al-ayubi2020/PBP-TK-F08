@@ -4,10 +4,9 @@
 {% block meta %}
 <title>Deposit</title>
 <script>
-  function show(data1, data2) {
-    tab = ``;
-
-    for (let r of data1) {
+  let tab = ``;
+  function show1(data) {
+    for (let r of data) {
       tab += `
         <div
           class="card w-full md:w-80 lg:w-96 bg-[#B6C790] hover:bg-[#B6C790] text-black glass"
@@ -26,7 +25,12 @@
     `;
     }
 
-    for (let r of data2) {
+    console.log("show1");
+    document.getElementById("table").innerHTML = tab;
+  }
+
+  function show2(data) {
+    for (let r of data) {
       const bool = r.fields.isApprove == "DITERIMA";
       tab += `
         <div
@@ -50,20 +54,19 @@
     `;
     }
 
-    console.log("show");
+    console.log("show2");
     document.getElementById("table").innerHTML = tab;
   }
 
   function loadData() {
-    let data1;
-    let data2;
     $.get("{% url 'deposit:getPending' %}", function (data) {
-      data1 = data;
-      console.log("pending");
-    });
+      show1(data);
+    }).then(loadData2());
+  }
+
+  function loadData2() {
     $.get("{% url 'deposit:getDeposit' %}", function (data) {
-      data2 = data;
-      show(data1, data2);
+      show2(data);
     });
   }
 
@@ -167,7 +170,11 @@
           type="submit"
           id="button"
         >
-          <label for="my-modal-4">Submit</label>
+          <label
+            for="my-modal-4"
+            class="w-full h-full flex items-center justify-center cursor-pointer"
+            >Submit</label
+          >
         </button>
       </div>
     </form>

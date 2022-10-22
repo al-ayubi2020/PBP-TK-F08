@@ -12,6 +12,7 @@ import math
 
 from .models import PendingDeposit
 from admin_page.models import Deposit
+from landing_page.models import UserData
 
 @login_required(login_url='/login/')
 def index(request):
@@ -49,6 +50,7 @@ def add(request):
             HARGA_PLASTIK = 10000
             HARGA_ELEKTRONIK = 12000
             user = request.user
+            usernow = UserData.objects.get(user=user)
             jenisSampah = request.POST.get('jenisSampah')
             beratSampah = int(request.POST.get('beratSampah'))
             totalHarga = 0
@@ -57,6 +59,9 @@ def add(request):
             elif jenisSampah == "ELEKTRONIK":
                 totalHarga = beratSampah * HARGA_ELEKTRONIK
             poin = totalHarga // 1000
+            usernow.balance += totalHarga
+            usernow.poin += poin
+            usernow.save()
             deposit = PendingDeposit(beratSampah=beratSampah, jenisSampah=jenisSampah, totalHarga=totalHarga, poin=poin, user=user, username=user.username)
             deposit.save()
             return JsonResponse({"instance": "Deposit Diajukan"}, status=200) 

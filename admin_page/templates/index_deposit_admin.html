@@ -79,8 +79,9 @@
     e.preventDefault();
     $.ajax({
       type: "POST",
-      url: "{% url 'deposit:add' %}",
+      url: "{% url 'admin_page:add_deposit' %}",
       data: {
+        user: $("#user").val(),
         jenisSampah: $("#jenisSampah").val(),
         beratSampah: $("#beratSampah").val(),
         csrfmiddlewaretoken: "{{ csrf_token }}",
@@ -88,11 +89,12 @@
       dataType: "json",
       success: function (data) {
         loadData();
+        document.getElementById("user").value = "";
         document.getElementById("jenisSampah").value = "";
         document.getElementById("beratSampah").value = "";
         console.log(data);
         $.toast({
-          text: "Deposit Berhasil Diajukan",
+          text: "Deposit Dibuat",
           showHideTransition: "fade", // It can be plain, fade or slide
           bgColor: "#23B65D", // Background color for toast
           textColor: "#eee", // text color
@@ -165,7 +167,11 @@
     <button
       class="btn btn-wide bg-[#F0F1AB] glass hover:bg-[#F0F1AB] text-black"
     >
-      Add
+      <label
+        for="my-modal-4"
+        class="w-full h-full flex items-center justify-center cursor-pointer"
+        >Add</label
+      >
     </button>
   </div>
   <div
@@ -174,6 +180,64 @@
   ></div>
   <!-- akhir konten -->
 </div>
+
+<input type="checkbox" id="my-modal-4" class="modal-toggle" />
+<label for="my-modal-4" class="modal cursor-pointer">
+  <label class="modal-box relative" for="">
+    <label for="my-modal-4" class="btn btn-sm btn-circle absolute right-2 top-2"
+      >✕</label
+    >
+    <h3 class="text-lg font-bold">Tambah Task</h3>
+    <form action="" id="buatproject">
+      {% csrf_token %}
+      <div class="form-control w-full mt-5">
+        <label class="label">
+          <span class="label-text">User</span>
+        </label>
+        <select class="select select-bordered w-full" id="user">
+          <option disabled selected>Pilih User</option>
+          {% for r in users %}
+          <option>{{r.user.username}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-control w-full mt-5">
+        <label class="label">
+          <span class="label-text">Jenis Sampah</span>
+        </label>
+        <select class="select select-bordered w-full" id="jenisSampah">
+          <option disabled selected>Pilih Jenis Sampah</option>
+          <option value="PLASTIK">Plastik</option>
+          <option value="ELEKTRONIK">Elektronik</option>
+        </select>
+      </div>
+      <div class="form-control w-full mb-5">
+        <label class="label">
+          <span class="label-text">Berat Total</span>
+        </label>
+        <input
+          type="number"
+          placeholder="Satuan KG"
+          class="input input-bordered w-full"
+          id="beratSampah"
+        />
+      </div>
+      <div class="w-full flex justify-end">
+        <button
+          class="btn btn-active btn-primary modal-action"
+          type="submit"
+          id="button"
+        >
+          <label
+            for="my-modal-4"
+            class="w-full h-full flex items-center justify-center cursor-pointer"
+            >Submit</label
+          >
+        </button>
+      </div>
+    </form>
+  </label>
+</label>
 <!-- prettier-ignore -->
 {% include 'depositBottomNavAdmin.html' %} 
 {% endblock content %}

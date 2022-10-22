@@ -36,7 +36,8 @@ def index_deposit(request):
     user = request.user
     role = get_user_roles(user)
     if (has_role(user, superUser)):
-        return render(request, 'index_deposit_admin.html', {'isLogin': True, 'role':role})
+        users = UserData.objects.all()
+        return render(request, 'index_deposit_admin.html', {'isLogin': True, 'role':role, "users": users})
     return redirect('/admin/login/')
 
 
@@ -48,6 +49,35 @@ def get_deposit(request):
     if (has_role(user, superUser)):
         pending = Deposit.objects.filter(isApprove="PENDING").order_by('-pk')
         return HttpResponse(serializers.serialize("json", pending), content_type="application/json")
+    return redirect('/admin/login/')
+
+@login_required(login_url='/admin/login/')
+def add_deposit(request):
+    isLogin = str(request.user)
+    user = request.user
+    role = get_user_roles(user)
+    if (has_role(user, superUser)):
+        if request.method == 'POST':
+            HARGA_PLASTIK = 10000
+            HARGA_ELEKTRONIK = 12000
+            user = request.POST.get('user')
+            jenisSampah = request.POST.get('jenisSampah')
+            beratSampah = int(request.POST.get('beratSampah'))
+            userNow = User.objects.get(username=user)
+            totalHarga = 0
+            if jenisSampah == "PLASTIK":
+                totalHarga = beratSampah * HARGA_PLASTIK
+            elif jenisSampah == "ELEKTRONIK":
+                totalHarga = beratSampah * HARGA_ELEKTRONIK
+            poin = totalHarga // 1000
+            deposit = Deposit(beratSampah=beratSampah, jenisSampah=jenisSampah, totalHarga=totalHarga, poin=poin, user=userNow, username=userNow.username, isApprove="DITERIMA")
+            deposit.save()
+            userdata = UserData.objects.get(user=userNow)
+            userdata.poin += poin
+            userdata.balance += totalHarga
+            userdata.save()
+            return JsonResponse({"instance": "Deposit Diajukan"}, status=200) 
+        return redirect('deposit:index')
     return redirect('/admin/login/')
 
 @login_required(login_url='/admin/login/')

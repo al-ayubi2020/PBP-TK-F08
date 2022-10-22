@@ -4,34 +4,17 @@
 {% block meta %}
 <title>Deposit</title>
 <script>
-  let tab = ``;
-  function show1(data) {
-    for (let r of data) {
-      tab += `
-        <div
-          class="card w-full md:w-80 lg:w-96 bg-[#B6C790] hover:bg-[#B6C790] text-black glass"
-        >
-          <div class="card-body">
-            <h2 class="card-title">${r.fields.date}</h2>
-            <div class="flex w-fit gap-3">
-              <p class="font-bold w-fit">${r.fields.jenisSampah}</p>
-              <p class="font-bold w-fit">${r.fields.beratSampah} Kg</p>
-            </div>
-            <p class="font-bold">Poin: ${r.fields.poin}</p>
-            <p class="font-bold">Saldo: ${r.fields.totalHarga}</p>
-            <p class="font-bold text-blue-400">${r.fields.isApprove}</p>
-          </div>
-        </div>
-    `;
-    }
-
-    console.log("show1");
-    document.getElementById("table").innerHTML = tab;
-  }
-
   function show2(data) {
+    let tab = ``;
     for (let r of data) {
-      const bool = r.fields.isApprove == "DITERIMA";
+      let par = ``;
+      if (r.fields.isApprove == "DITERIMA") {
+        par = `<p class="font-bold text-green-400">DITERIMA</p>`;
+      } else if (r.fields.isApprove == "PENDING") {
+        par = `<p class="font-bold text-blue-400">PENDING</p>`;
+      } else if (r.fields.isApprove == "DITOLAK") {
+        par = `<p class="font-bold text-red-400">DITOLAK</p>`;
+      }
       tab += `
         <div
           class="card w-full md:w-80 lg:w-96 bg-[#B6C790] hover:bg-[#B6C790] text-black glass"
@@ -44,11 +27,7 @@
             </div>
             <p class="font-bold">Poin: ${r.fields.poin}</p>
             <p class="font-bold">Saldo: ${r.fields.totalHarga}</p>
-            {% if bool == true %}
-            <p class="font-bold text-green-400">DITERIMA</p>
-            {% else %}
-            <p class="font-bold text-red-400">DITOLAK</p>
-            {% endif %}
+            ${par}
           </div>
         </div>
     `;
@@ -58,12 +37,6 @@
     document.getElementById("table").innerHTML = tab;
   }
 
-  function loadData() {
-    $.get("{% url 'deposit:getPending' %}", function (data) {
-      show1(data);
-    }).then(loadData2());
-  }
-
   function loadData2() {
     $.get("{% url 'deposit:getDeposit' %}", function (data) {
       show2(data);
@@ -71,7 +44,7 @@
   }
 
   $(document).ready(function () {
-    loadData();
+    loadData2();
   });
 
   $(document).on("submit", "#buatproject", function (e) {
@@ -86,7 +59,7 @@
       },
       dataType: "json",
       success: function (data) {
-        loadData();
+        loadData2();
         document.getElementById("jenisSampah").value = "";
         document.getElementById("beratSampah").value = "";
         console.log(data);

@@ -10,7 +10,6 @@ from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 import math
 
-from .models import PendingDeposit
 from admin_page.models import Deposit
 from landing_page.models import UserData
 
@@ -21,15 +20,6 @@ def index(request):
     if (has_role(user, commonUser)):
         
         return render(request, 'index_deposit.html')
-    return redirect('/login/')
-
-@login_required(login_url='/login/')
-def getPending(request):
-    user = request.user
-    role = get_user_roles(user)
-    if (has_role(user, commonUser)):
-        pending = PendingDeposit.objects.filter(user=user).order_by('-pk')
-        return HttpResponse(serializers.serialize("json", pending), content_type="application/json")
     return redirect('/login/')
 
 @login_required(login_url='/login/')
@@ -50,7 +40,6 @@ def add(request):
             HARGA_PLASTIK = 10000
             HARGA_ELEKTRONIK = 12000
             user = request.user
-            usernow = UserData.objects.get(user=user)
             jenisSampah = request.POST.get('jenisSampah')
             beratSampah = int(request.POST.get('beratSampah'))
             totalHarga = 0
@@ -59,10 +48,7 @@ def add(request):
             elif jenisSampah == "ELEKTRONIK":
                 totalHarga = beratSampah * HARGA_ELEKTRONIK
             poin = totalHarga // 1000
-            usernow.balance += totalHarga
-            usernow.poin += poin
-            usernow.save()
-            deposit = PendingDeposit(beratSampah=beratSampah, jenisSampah=jenisSampah, totalHarga=totalHarga, poin=poin, user=user, username=user.username)
+            deposit = Deposit(beratSampah=beratSampah, jenisSampah=jenisSampah, totalHarga=totalHarga, poin=poin, user=user, username=user.username, isApprove="PENDING")
             deposit.save()
             return JsonResponse({"instance": "Deposit Diajukan"}, status=200) 
         return redirect('deposit:index')

@@ -16,7 +16,6 @@ from rolepermissions.decorators import has_role_decorator
 from project_django.roles import superUser
 from rolepermissions.checkers import has_role
 
-from deposit.models import PendingDeposit
 from .models import Deposit
 from landing_page.models import UserData
 
@@ -26,7 +25,9 @@ def index(request):
     user = request.user
     role = get_user_roles(user)
     if (has_role(user, superUser)):
-        return render(request, 'index_admin.html', {'isLogin': True, 'role':role})
+        jumlahUser = UserData.objects.all().count()
+        jumlahDeposit = Deposit.objects.all().count()
+        return render(request, 'index_admin.html', {'isLogin': True, 'role':role, "jumlahUser" : jumlahUser, 'jumlahDeposit':jumlahDeposit})
     return redirect('/admin/login/')
 
 @login_required(login_url='/admin/login/')
@@ -45,7 +46,7 @@ def get_deposit(request):
     user = request.user
     role = get_user_roles(user)
     if (has_role(user, superUser)):
-        pending = PendingDeposit.objects.all().order_by('-pk')
+        pending = Deposit.objects.filter(isApprove="PENDING").order_by('-pk')
         return HttpResponse(serializers.serialize("json", pending), content_type="application/json")
     return redirect('/admin/login/')
 
@@ -56,15 +57,27 @@ def acc_deposit(request, id):
     role = get_user_roles(user)
     if (has_role(user, superUser)):
         if request.method == 'POST':
-            pending = PendingDeposit.objects.get(pk=id)
-            userNow = User.objects.get(pk=pending.user.id)
-            deposit = Deposit(date=pending.date, user=userNow, beratSampah=pending.beratSampah, jenisSampah=pending.jenisSampah, poin=pending.poin, totalHarga=pending.totalHarga, username=userNow.username, isApprove="DITERIMA")
+            deposit = Deposit.objects.get(pk=id)
+            deposit.isApprove = "DITERIMA"
             deposit.save()
-            userdata = UserData.objects.get(user=userNow)
-            userdata.balance += pending.totalHarga
-            userdata.poin += pending.poin
+            userdata = UserData.objects.get(user=deposit.user)
+            userdata.balance += deposit.totalHarga
+            userdata.poin += deposit.poin
             userdata.save()
-            pending.delete()
+            return JsonResponse({"instance": "Deposit Diterima"}, status=200) 
+        return redirect('admin_page:deposit')
+    return redirect('/admin/login/')
+
+@login_required(login_url='/admin/login/')
+def del_deposit(request, id):
+    isLogin = str(request.user)
+    user = request.user
+    role = get_user_roles(user)
+    if (has_role(user, superUser)):
+        if request.method == 'POST':
+            deposit = Deposit.objects.get(pk=id)
+            deposit.isApprove = "DITOLAK"
+            deposit.save()
             return JsonResponse({"instance": "Deposit Diterima"}, status=200) 
         return redirect('admin_page:deposit')
     return redirect('/admin/login/')

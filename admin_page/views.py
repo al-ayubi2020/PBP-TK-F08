@@ -16,7 +16,7 @@ from rolepermissions.decorators import has_role_decorator
 from project_django.roles import superUser
 from rolepermissions.checkers import has_role
 
-from .models import Deposit
+from .models import Deposit, Prize
 from landing_page.models import UserData
 
 @login_required(login_url='/admin/login/')
@@ -77,7 +77,7 @@ def add_deposit(request):
             userdata.balance += totalHarga
             userdata.save()
             return JsonResponse({"instance": "Deposit Diajukan"}, status=200) 
-        return redirect('deposit:index')
+        return redirect('admin_page:deposit')
     return redirect('/admin/login/')
 
 @login_required(login_url='/admin/login/')
@@ -108,7 +108,7 @@ def del_deposit(request, id):
             deposit = Deposit.objects.get(pk=id)
             deposit.isApprove = "DITOLAK"
             deposit.save()
-            return JsonResponse({"instance": "Deposit Diterima"}, status=200) 
+            return JsonResponse({"instance": "Deposit Dihapus"}, status=200) 
         return redirect('admin_page:deposit')
     return redirect('/admin/login/')
 
@@ -119,6 +119,47 @@ def index_prize(request):
     role = get_user_roles(user)
     if (has_role(user, superUser)):
         return render(request, 'index_prize_admin.html', {'isLogin': True, 'role':role})
+    return redirect('/admin/login/')
+
+@login_required(login_url='/admin/login/')
+def add_prize(request):
+    isLogin = str(request.user)
+    user = request.user
+    role = get_user_roles(user)
+    if (has_role(user, superUser)):
+        if request.method == 'POST':
+            nama = request.POST.get('nama')
+            poin = int(request.POST.get('poin'))
+            stok = int(request.POST.get('stok'))
+            if (poin > 0 and stok > 0):
+                prize = Prize(nama=nama, poin=poin, stok=stok)
+                prize.save()
+                return JsonResponse({"instance": "Prize Dibuat"}, status=200) 
+            return JsonResponse({"instance": "Poin dan Stok tidak boleh 0"}, status=200) 
+        return redirect('admin_page:prize')
+    return redirect('/admin/login/')
+
+@login_required(login_url='/admin/login/')
+def get_prize(request):
+    isLogin = str(request.user)
+    user = request.user
+    role = get_user_roles(user)
+    if (has_role(user, superUser)):
+        prize = Prize.objects.all().order_by('-pk')
+        return HttpResponse(serializers.serialize("json", prize), content_type="application/json")
+    return redirect('/admin/login/')
+
+@login_required(login_url='/admin/login/')
+def del_prize(request, id):
+    isLogin = str(request.user)
+    user = request.user
+    role = get_user_roles(user)
+    if (has_role(user, superUser)):
+        if request.method == 'POST':
+            prize = Prize.objects.get(pk=id)
+            prize.delete()
+            return JsonResponse({"instance": "Deposit Diterima"}, status=200) 
+        return redirect('admin_page:prize')
     return redirect('/admin/login/')
 
 def register(request):

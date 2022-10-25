@@ -9,6 +9,7 @@ class Prize(models.Model):
     nama = models.TextField()
     poin = models.BigIntegerField()
     stok = models.BigIntegerField()
+    desc = models.TextField(default="")
 
 class Withdraw(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

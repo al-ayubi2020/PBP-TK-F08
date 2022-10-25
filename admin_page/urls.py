@@ -10,6 +10,9 @@ from .views import acc_deposit
 from .views import del_deposit
 from .views import add_deposit
 from .views import add_prize
+from .views import get_prize
+from .views import del_prize
+
 
 app_name = 'admin_page'
 
@@ -22,6 +25,8 @@ urlpatterns = [
     path('deposit/acc/<int:id>', acc_deposit, name='acc_deposit'),
     path('prize/', index_prize, name='prize'),
     path('prize/add', add_prize, name='add_prize'),
+    path('prize/get', get_prize, name='get_prize'),
+    path('prize/del/<int:id>', del_prize, name='del_prize'),
     path('login/', login_user, name='login_user'),
     path('register/', register, name='register'),
     path('logout/', logout_user, name='logout_user'),

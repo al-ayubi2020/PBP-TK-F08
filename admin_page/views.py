@@ -131,8 +131,9 @@ def add_prize(request):
             nama = request.POST.get('nama')
             poin = int(request.POST.get('poin'))
             stok = int(request.POST.get('stok'))
+            desc = request.POST.get('desc')
             if (poin > 0 and stok > 0):
-                prize = Prize(nama=nama, poin=poin, stok=stok)
+                prize = Prize(nama=nama, poin=poin, stok=stok, desc=desc)
                 prize.save()
                 return JsonResponse({"instance": "Prize Dibuat"}, status=200) 
             return JsonResponse({"instance": "Poin dan Stok tidak boleh 0"}, status=200) 

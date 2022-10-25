@@ -52,6 +52,17 @@ def get_deposit(request):
     return redirect('/admin/login/')
 
 @login_required(login_url='/admin/login/')
+def get_deposit_count(request):
+    isLogin = str(request.user)
+    user = request.user
+    role = get_user_roles(user)
+    if (has_role(user, superUser)):
+        pending = Deposit.objects.filter(isApprove="PENDING").count()
+        tes = [pending]
+        return HttpResponse(tes)
+    return redirect('/admin/login/')
+
+@login_required(login_url='/admin/login/')
 def add_deposit(request):
     isLogin = str(request.user)
     user = request.user
@@ -193,7 +204,7 @@ def login_user(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
-        if user is not None:
+        if user is not None and has_role(user, superUser):
             login(request, user) 
             response = HttpResponseRedirect(reverse("admin_page:index")) 
             return response

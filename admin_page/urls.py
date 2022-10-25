@@ -2,6 +2,7 @@ from django.urls import path
 from .views import index
 from .views import index_deposit
 from .views import get_deposit
+from .views import get_deposit_count
 from .views import index_prize
 from .views import login_user
 from .views import logout_user
@@ -20,6 +21,7 @@ urlpatterns = [
     path('', index, name='index'),
     path('deposit/', index_deposit, name='deposit'),
     path('deposit/get/', get_deposit, name='get_deposit'),
+    path('deposit/get/count/', get_deposit_count, name='get_deposit_count'),
     path('deposit/add/', add_deposit, name='add_deposit'),
     path('deposit/del/<int:id>', del_deposit, name='del_deposit'),
     path('deposit/acc/<int:id>', acc_deposit, name='acc_deposit'),

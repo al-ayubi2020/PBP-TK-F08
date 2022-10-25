@@ -7,9 +7,17 @@
     >
   </div>
   <div class="flex-none gap-2">
-    <ul class="menu menu-horizontal p-0 hidden sm:flex">
+    <ul class="menu menu-horizontal p-0 hidden sm:flex space-x-9">
       <li><a href="{% url 'admin_page:index' %}">Home</a></li>
-      <li><a href="{% url 'admin_page:deposit' %}">Deposit</a></li>
+      <li>
+        <div class="indicator">
+          <span
+            class="indicator-item badge badge-secondary hidden"
+            id="notif"
+          ></span>
+          <a href="{% url 'admin_page:deposit' %}">Deposit</a>
+        </div>
+      </li>
       <li><a href="{% url 'admin_page:prize' %}">Prize</a></li>
     </ul>
     <div class="dropdown dropdown-end">
@@ -50,3 +58,30 @@
     </div>
   </div>
 </div>
+
+<script>
+  let count = 0;
+  function loadDataNav() {
+    $.get("{% url 'admin_page:get_deposit_count' %}", function (data) {
+      count = data;
+      console.log(count);
+      showCount();
+    });
+  }
+
+  function showCount() {
+    if (count > 0) {
+      document.getElementById("notif").className =
+        "indicator-item badge badge-secondary";
+      document.getElementById("notif").innerHTML = count;
+
+      document.getElementById("notif2").className =
+        "indicator-item indicator-center badge badge-secondary";
+      document.getElementById("notif2").innerHTML = count;
+    }
+  }
+
+  $(document).ready(function () {
+    loadDataNav();
+  });
+</script>

@@ -17,7 +17,14 @@
       </svg>
     </button>
   </a>
-  <a href="{% url 'admin_page:deposit' %}" class="text-success active">
+  <a
+    href="{% url 'admin_page:deposit' %}"
+    class="text-success active indicator"
+  >
+    <span
+      class="indicator-item badge badge-secondary hidden"
+      id="notif2"
+    ></span>
     <button class="text-success">
       <svg
         xmlns="http://www.w3.org/2000/svg"

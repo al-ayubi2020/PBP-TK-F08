@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.http.response import JsonResponse
 import datetime
 from landing_page.models import UserData
-
+from rolepermissions.checkers import has_role
 
 from rolepermissions.roles import assign_role, get_user_roles
 from project_django.roles import commonUser
@@ -57,7 +57,7 @@ def login_user(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
-        if user is not None:
+        if user is not None and has_role(user, commonUser):
             login(request, user) 
             return HttpResponseRedirect(reverse("user_dashboard:index")) 
         else:

@@ -10,20 +10,3 @@ class Prize(models.Model):
     poin = models.BigIntegerField()
     stok = models.BigIntegerField()
     desc = models.TextField(default="")
-
-class Withdraw(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateField(default=datetime.now)
-    jumlah = models.TextField()
-    isApprove = models.TextField(default="APPROVED")
-
-class Deposit(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateField(default=datetime.now)
-    username = models.TextField(default='')
-    jenisSampah = models.TextField()
-    beratSampah = models.BigIntegerField()
-    poin = models.BigIntegerField()
-    totalHarga = models.BigIntegerField()
-    isApprove = models.TextField()
-

@@ -16,7 +16,9 @@ from rolepermissions.decorators import has_role_decorator
 from project_django.roles import superUser
 from rolepermissions.checkers import has_role
 
-from .models import Deposit, Prize
+from deposit.models import Deposit
+from prize.models import Prize
+
 from landing_page.models import UserData
 
 from .forms import *

@@ -10,7 +10,7 @@ from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 import math
 
-from admin_page.models import Deposit
+from deposit.models import Deposit
 from landing_page.models import UserData
 
 from .forms import DepositForm

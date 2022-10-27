@@ -8,7 +8,7 @@ from django.http.response import JsonResponse
 from django.core import serializers
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
-from admin_page.models import Withdraw
+from withdraw.models import Withdraw
 from landing_page.models import UserData
 
 from .forms import WithdrawForm

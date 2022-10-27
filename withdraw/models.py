@@ -4,8 +4,8 @@ from datetime import datetime
 
 # Create your models here.
 
-class PendingWithdraw(models.Model):
+class Withdraw(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(default=datetime.now)
-    jumlah = models.BigIntegerField()
-    isApprove = models.TextField(default="PENDING")
+    jumlah = models.TextField()
+    isApprove = models.TextField(default="APPROVED")

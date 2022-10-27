@@ -95,7 +95,7 @@ function redeem(id) {
       $.toast({
         text: data.instance,
         showHideTransition: "fade", // It can be plain, fade or slide
-        bgColor: "#E01A31", // Background color for toast
+        bgColor: "#23B65D", // Background color for toast
         textColor: "#eee", // text color
         allowToastClose: false, // Show the close button or not
         hideAfter: 2000, // `false` to make it sticky or time in miliseconds to hide after
@@ -118,7 +118,7 @@ function use(id) {
       $.toast({
         text: data.instance,
         showHideTransition: "fade", // It can be plain, fade or slide
-        bgColor: "#E01A31", // Background color for toast
+        bgColor: "#23B65D", // Background color for toast
         textColor: "#eee", // text color
         allowToastClose: false, // Show the close button or not
         hideAfter: 2000, // `false` to make it sticky or time in miliseconds to hide after

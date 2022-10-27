@@ -49,19 +49,21 @@
 
   $(document).on("submit", "#buatproject", function (e) {
     e.preventDefault();
+    console.log($("#id_jenisSampah").val());
+    console.log($("#id_beratSampah").val());
     $.ajax({
       type: "POST",
       url: "{% url 'deposit:add' %}",
       data: {
-        jenisSampah: $("#jenisSampah").val(),
-        beratSampah: $("#beratSampah").val(),
+        jenisSampah: $("#id_jenisSampah").val(),
+        beratSampah: $("#id_beratSampah").val(),
         csrfmiddlewaretoken: "{{ csrf_token }}",
       },
       dataType: "json",
       success: function (data) {
         loadData2();
-        document.getElementById("jenisSampah").value = "";
-        document.getElementById("beratSampah").value = "";
+        document.getElementById("id_jenisSampah").value = "";
+        document.getElementById("id_beratSampah").value = "";
         console.log(data);
         $.toast({
           text: "Deposit Berhasil Diajukan",
@@ -120,22 +122,24 @@
         <label class="label">
           <span class="label-text">Jenis Sampah</span>
         </label>
-        <select class="select select-bordered w-full" id="jenisSampah">
+        {{ form.jenisSampah }}
+        <!-- <select class="select select-bordered w-full" id="jenisSampah">
           <option disabled selected>Pilih Jenis Sampah</option>
           <option value="PLASTIK">Plastik</option>
           <option value="ELEKTRONIK">Elektronik</option>
-        </select>
+        </select> -->
       </div>
       <div class="form-control w-full mb-5">
         <label class="label">
           <span class="label-text">Berat Total</span>
         </label>
-        <input
+        {{ form.beratSampah }}
+        <!-- <input
           type="number"
           placeholder="Satuan KG"
           class="input input-bordered w-full"
           id="beratSampah"
-        />
+        /> -->
       </div>
       <div class="w-full flex justify-end">
         <button

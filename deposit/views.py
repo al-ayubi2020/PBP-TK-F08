@@ -13,13 +13,18 @@ import math
 from admin_page.models import Deposit
 from landing_page.models import UserData
 
+from .forms import DepositForm
+
 @login_required(login_url='/login/')
 def index(request):
     user = request.user
     role = get_user_roles(user)
     if (has_role(user, commonUser)):
-        
-        return render(request, 'index_deposit.html')
+        form = DepositForm()
+        context = {
+            'form' : form
+        }
+        return render(request, 'index_deposit.html', context)
     return redirect('/login/')
 
 @login_required(login_url='/login/')
@@ -36,16 +41,17 @@ def add(request):
     user = request.user
     role = get_user_roles(user)
     if has_role(user, commonUser):
-        if request.method == 'POST':
+        form = DepositForm()
+        if request.method == 'POST' and form.is_valid:
             HARGA_PLASTIK = 10000
             HARGA_ELEKTRONIK = 12000
             user = request.user
             jenisSampah = request.POST.get('jenisSampah')
             beratSampah = int(request.POST.get('beratSampah'))
             totalHarga = 0
-            if jenisSampah == "PLASTIK":
+            if jenisSampah == "Plastik":
                 totalHarga = beratSampah * HARGA_PLASTIK
-            elif jenisSampah == "ELEKTRONIK":
+            elif jenisSampah == "Elektronik":
                 totalHarga = beratSampah * HARGA_ELEKTRONIK
             poin = totalHarga // 1000
             deposit = Deposit(beratSampah=beratSampah, jenisSampah=jenisSampah, totalHarga=totalHarga, poin=poin, user=user, username=user.username, isApprove="PENDING")

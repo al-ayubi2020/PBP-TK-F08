@@ -42,13 +42,13 @@
       type: "POST",
       url: "{% url 'withdraw:add' %}",
       data: {
-        jumlah: $("#jumlah").val(),
+        jumlah: $("#id_jumlah").val(),
         csrfmiddlewaretoken: "{{ csrf_token }}",
       },
       dataType: "json",
       success: function (data) {
         loadData();
-        document.getElementById("jumlah").value = "";
+        document.getElementById("id_jumlah").value = "";
         console.log(data.instance);
         if (data.instance == "Saldo Kurang") {
           $.toast({
@@ -119,12 +119,13 @@
         <label class="label">
           <span class="label-text">Jumlah Penarikan</span>
         </label>
-        <input
+        {{ form.jumlah }}
+        <!-- <input
           type="number"
           placeholder="Rupiah"
           class="input input-bordered w-full"
           id="jumlah"
-        />
+        /> -->
       </div>
       <div class="w-full flex justify-end">
         <button

@@ -15,6 +15,8 @@ from rolepermissions.checkers import has_role
 from rolepermissions.roles import assign_role, get_user_roles
 from project_django.roles import commonUser
 
+from .forms import LoginForm, RegisterForm
+
 def forbiden(request):
     return render(request, 'forbiden.html')
 
@@ -27,7 +29,8 @@ def index(request):
     return render(request, 'index_landing.html', {'isLogin': True, 'role':role})
 
 def register(request):
-    if request.method == "POST":
+    form = RegisterForm()
+    if request.method == "POST" and form.is_valid:
         username = request.POST.get('username')
         password = request.POST.get('password')
         form = UserCreationForm(request.POST)
@@ -49,11 +52,12 @@ def register(request):
             messages.success(request, 'Tidak boleh kosong!')
 
     
-    context = {}
+    context = {'form' : form}
     return render(request, 'register.html', context)
 
 def login_user(request):
-    if request.method == 'POST':
+    form = LoginForm()
+    if request.method == 'POST' and form.is_valid:
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
@@ -62,7 +66,7 @@ def login_user(request):
             return HttpResponseRedirect(reverse("user_dashboard:index")) 
         else:
             messages.info(request, 'Username atau Password salah!')
-    context = {}
+    context = {'form' : form}
     return render(request, "login.html", context)
 
 @login_required(login_url='/login/')

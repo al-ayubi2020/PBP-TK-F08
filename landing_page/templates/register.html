@@ -16,23 +16,25 @@
           {% csrf_token %}
           <p class="font-bold text-4xl text-[#FF7F00] my-10">Register</p>
           <div class="space-y-5 w-full">
-            <div class="w-full">
+            <div class="w-full flex flex-col items-center justify-center">
               <p class="text-sm">Username</p>
-              <input
+              {{ form.username }}
+              <!-- <input
                 type="text"
                 name="username"
                 class="form-control rounded-md border border-gray-400 w-full"
                 placeholder="Enter Your Username here"
-              />
+              /> -->
             </div>
-            <div>
+            <div class="w-full flex flex-col items-center justify-center">
               <p class="text-sm">Password</p>
-              <input
+              {{ form.password }}
+              <!-- <input
                 type="password"
                 name="password"
                 class="form-control rounded-md border border-gray-400 w-full"
                 placeholder="Enter Your Password here"
-              />
+              /> -->
             </div>
           </div>
           <input

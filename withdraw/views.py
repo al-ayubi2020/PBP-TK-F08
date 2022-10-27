@@ -11,6 +11,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from admin_page.models import Withdraw
 from landing_page.models import UserData
 
+from .forms import WithdrawForm
 
 
 @login_required(login_url='/login/')
@@ -18,7 +19,11 @@ def index(request):
     user = request.user
     role = get_user_roles(user)
     if (has_role(user, commonUser)):
-        return render(request, 'index_withdraw.html')
+        form = WithdrawForm()
+        context = {
+            'form' : form
+        }
+        return render(request, 'index_withdraw.html', context)
     return redirect('/login/')
 
 @login_required(login_url='/login/')

@@ -111,16 +111,16 @@
       url: "{% url 'admin_page:add_deposit' %}",
       data: {
         user: $("#user").val(),
-        jenisSampah: $("#jenisSampah").val(),
-        beratSampah: $("#beratSampah").val(),
+        jenisSampah: $("#id_jenisSampah").val(),
+        beratSampah: $("#id_beratSampah").val(),
         csrfmiddlewaretoken: "{{ csrf_token }}",
       },
       dataType: "json",
       success: function (data) {
         loadData();
         document.getElementById("user").value = "";
-        document.getElementById("jenisSampah").value = "";
-        document.getElementById("beratSampah").value = "";
+        document.getElementById("id_jenisSampah").value = "";
+        document.getElementById("id_beratSampah").value = "";
         console.log(data);
         $.toast({
           text: "Deposit Dibuat",
@@ -234,22 +234,24 @@
         <label class="label">
           <span class="label-text">Jenis Sampah</span>
         </label>
-        <select class="select select-bordered w-full" id="jenisSampah">
+        {{ form.jenisSampah }}
+        <!-- <select class="select select-bordered w-full" id="jenisSampah">
           <option disabled selected>Pilih Jenis Sampah</option>
           <option value="PLASTIK">Plastik</option>
           <option value="ELEKTRONIK">Elektronik</option>
-        </select>
+        </select> -->
       </div>
       <div class="form-control w-full mb-5">
         <label class="label">
           <span class="label-text">Berat Total</span>
         </label>
-        <input
+        {{ form.beratSampah }}
+        <!-- <input
           type="number"
           placeholder="Satuan KG"
           class="input input-bordered w-full"
           id="beratSampah"
-        />
+        /> -->
       </div>
       <div class="w-full flex justify-end">
         <button

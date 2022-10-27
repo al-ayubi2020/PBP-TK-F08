@@ -19,6 +19,8 @@ from rolepermissions.checkers import has_role
 from .models import Deposit, Prize
 from landing_page.models import UserData
 
+from .forms import *
+
 @login_required(login_url='/admin/login/')
 def index(request):
     isLogin = str(request.user)
@@ -36,8 +38,9 @@ def index_deposit(request):
     user = request.user
     role = get_user_roles(user)
     if (has_role(user, superUser)):
+        form = DepositForm()
         users = UserData.objects.all()
-        return render(request, 'index_deposit_admin.html', {'isLogin': True, 'role':role, "users": users})
+        return render(request, 'index_deposit_admin.html', {'isLogin': True, 'role':role, "users": users, 'form': form})
     return redirect('/admin/login/')
 
 
@@ -68,7 +71,8 @@ def add_deposit(request):
     user = request.user
     role = get_user_roles(user)
     if (has_role(user, superUser)):
-        if request.method == 'POST':
+        form = DepositForm()
+        if request.method == 'POST' and form.is_valid:
             HARGA_PLASTIK = 10000
             HARGA_ELEKTRONIK = 12000
             user = request.POST.get('user')
@@ -129,7 +133,8 @@ def index_prize(request):
     user = request.user
     role = get_user_roles(user)
     if (has_role(user, superUser)):
-        return render(request, 'index_prize_admin.html', {'isLogin': True, 'role':role})
+        form = PrizeForm()
+        return render(request, 'index_prize_admin.html', {'isLogin': True, 'role':role, 'form': form})
     return redirect('/admin/login/')
 
 @login_required(login_url='/admin/login/')
@@ -138,7 +143,8 @@ def add_prize(request):
     user = request.user
     role = get_user_roles(user)
     if (has_role(user, superUser)):
-        if request.method == 'POST':
+        form = PrizeForm()
+        if request.method == 'POST' and form.is_valid:
             nama = request.POST.get('nama')
             poin = int(request.POST.get('poin'))
             stok = int(request.POST.get('stok'))
@@ -175,7 +181,8 @@ def del_prize(request, id):
     return redirect('/admin/login/')
 
 def register(request):
-    if request.method == "POST":
+    form = RegisterForm()
+    if request.method == "POST" and form.is_valid:
         username = request.POST.get('username')
         password = request.POST.get('password')
         form = UserCreationForm(request.POST)
@@ -195,12 +202,12 @@ def register(request):
         else:
             messages.success(request, 'Tidak boleh kosong!')
 
-    
-    context = {}
+    context = {'form' : form}
     return render(request, 'register_admin.html', context)
 
 def login_user(request):
-    if request.method == 'POST':
+    form = LoginForm()
+    if request.method == 'POST' and form.is_valid:
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
@@ -210,7 +217,7 @@ def login_user(request):
             return response
         else:
             messages.info(request, 'Username atau Password salah!')
-    context = {}
+    context = {'form': form}
     return render(request, "login_admin.html", context)
 
 @login_required(login_url='/admin/login/')

@@ -45,19 +45,19 @@
       type: "POST",
       url: "{% url 'admin_page:add_prize' %}",
       data: {
-        nama: $("#nama").val(),
-        poin: $("#poin").val(),
-        stok: $("#stok").val(),
-        desc: $("#desc").val(),
+        nama: $("#id_nama").val(),
+        poin: $("#id_poin").val(),
+        stok: $("#id_stok").val(),
+        desc: $("#id_desc").val(),
         csrfmiddlewaretoken: "{{ csrf_token }}",
       },
       dataType: "json",
       success: function (data) {
         loadData();
-        document.getElementById("nama").value = "";
-        document.getElementById("poin").value = "";
-        document.getElementById("stok").value = "";
-        document.getElementById("desc").value = "";
+        document.getElementById("id_nama").value = "";
+        document.getElementById("id_poin").value = "";
+        document.getElementById("id_stok").value = "";
+        document.getElementById("id_desc").value = "";
         console.log(data);
         $.toast({
           text: data.instance,
@@ -136,43 +136,47 @@
         <label class="label">
           <span class="label-text">Nama / Judul</span>
         </label>
-        <input
+        {{ form.nama }}
+        <!-- <input
           required
           type="text"
           placeholder="Masukan nama hadiah"
           class="input input-bordered w-full"
           id="nama"
-        />
+        /> -->
       </div>
       <div class="form-control w-full mb-5">
         <label class="label">
           <span class="label-text">Poin</span>
         </label>
-        <input
+        {{ form.poin }}
+        <!-- <input
           required
           type="number"
           placeholder="Masukan poin"
           class="input input-bordered w-full"
           id="poin"
-        />
+        /> -->
       </div>
       <div class="form-control w-full mb-5">
         <label class="label">
           <span class="label-text">Stok</span>
         </label>
-        <input
+        {{ form.stok }}
+        <!-- <input
           required
           type="number"
           placeholder="Tentukan stok"
           class="input input-bordered w-full"
           id="stok"
-        />
+        /> -->
       </div>
       <div class="form-control w-full mb-5">
         <label class="label">
           <span class="label-text">Deskripsi</span>
         </label>
-        <textarea class="textarea textarea-bordered" placeholder="Deskripsi" id="desc" required></textarea>
+        {{ form.desc }}
+        <!-- <textarea class="textarea textarea-bordered" placeholder="Deskripsi" id="desc" required></textarea> -->
 
       <div class="w-full flex justify-end">
         <button

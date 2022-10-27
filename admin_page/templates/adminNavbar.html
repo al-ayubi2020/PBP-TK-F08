@@ -59,29 +59,5 @@
   </div>
 </div>
 
-<script>
-  let count = 0;
-  function loadDataNav() {
-    $.get("{% url 'admin_page:get_deposit_count' %}", function (data) {
-      count = data;
-      console.log(count);
-      showCount();
-    });
-  }
-
-  function showCount() {
-    if (count > 0) {
-      document.getElementById("notif").className =
-        "indicator-item badge badge-secondary";
-      document.getElementById("notif").innerHTML = count;
-
-      document.getElementById("notif2").className =
-        "indicator-item indicator-center badge badge-secondary";
-      document.getElementById("notif2").innerHTML = count;
-    }
-  }
-
-  $(document).ready(function () {
-    loadDataNav();
-  });
-</script>
+{% load static %}
+<script src="{% static 'js/adminNavbar.js' %}"></script>

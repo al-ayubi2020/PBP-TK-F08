@@ -1197,6 +1197,10 @@ select {
   background-image: url(../../static/Garbagehope.jpg);
 }
 
+.bg-\[url\(\.\.\/\.\.\/static\/Garbage\.jpg\)\] {
+  background-image: url(../../static/Garbage.jpg);
+}
+
 .bg-cover {
   background-size: cover;
 }

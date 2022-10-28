@@ -8,17 +8,15 @@
 {% block content %}
 {% include 'adminNavbar.html' %}
 <div class="min-h-screen sm:pb-0">
-  <div class="hero min-h-screen pb-20 sm:pb-0 bg-base-200">
-    <div class="hero-content flex-col lg:flex-row">
-      <img src="{% static 'bin.png' %}" />
-      <div>
-        <h1 class="text-5xl font-bold">Box Office News!</h1>
-        <p class="py-6">
-          Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-          excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a
-          id nisi.
-        </p>
-        <div class="flex flex-col xl:flex-row gap-5">
+  <div
+    class="hero min-h-screen pb-20 sm:pb-0 bg-base-200 flex items-center justify-center"
+  >
+    <div class="hero-content flex-col md:flex-row w-full">
+      <img src="{% static 'bin.png' %}" class="h-60 w-60" />
+      <div class="w-full xl:w-fit">
+        <h1 class="text-5xl font-bold">Hi, Admin!</h1>
+        <p class="py-6">Welcome to Admin Panel.</p>
+        <div class="flex flex-col lg:flex-row gap-5">
           <div
             class="card w-full xl:w-96 bg-[#7E93BE] hover:bg-[#7E93BE] text-black glass"
           >
@@ -31,7 +29,7 @@
             class="card w-full xl:w-96 bg-[#A7CBD9] hover:bg-[#A7CBD9] text-black glass"
           >
             <div class="card-body">
-              <h2 class="card-title">Total Setoran</h2>
+              <h2 class="card-title">Total Deposit</h2>
               <p class="font-bold">{{ jumlahDeposit }}</p>
             </div>
           </div>

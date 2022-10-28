@@ -8,8 +8,8 @@ function show(data) {
 >
   <div class="card-body">
     <h2 class="card-title">${r.fields.nama}</h2>
-    <p class="">${r.fields.stok}</p>
-    <p class="">${r.fields.poin}</p>
+    <p class="">Stok: ${r.fields.stok}</p>
+    <p class="">Poin: ${r.fields.poin}</p>
     <p class="">${r.fields.desc}</p>
     <div class="card-actions justify-end">
       <button class="btn btn-error" onclick={delData(${r.pk})}>Delete</button>

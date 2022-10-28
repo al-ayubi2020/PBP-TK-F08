@@ -4,7 +4,7 @@ function show(data) {
   for (let r of data) {
     tab += `
         <div
-    class="card w-full bg-[#7E93BE] hover:bg-[#7E93BE] text-black glass"
+    class="card w-full bg-[#FFB8BF] hover:bg-[#FFB8BF] text-black glass"
   >
     <div class="card-body">
       <h2 class="card-title">${r.fields.username}</h2>

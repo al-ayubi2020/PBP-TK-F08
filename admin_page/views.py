@@ -82,9 +82,9 @@ def add_deposit(request):
             beratSampah = int(request.POST.get('beratSampah'))
             userNow = User.objects.get(username=user)
             totalHarga = 0
-            if jenisSampah == "Plastik":
+            if jenisSampah == "PLASTIK":
                 totalHarga = beratSampah * HARGA_PLASTIK
-            elif jenisSampah == "Elektronik":
+            elif jenisSampah == "ELEKTRONIK":
                 totalHarga = beratSampah * HARGA_ELEKTRONIK
             poin = totalHarga // 1000
             deposit = Deposit(beratSampah=beratSampah, jenisSampah=jenisSampah, totalHarga=totalHarga, poin=poin, user=userNow, username=userNow.username, isApprove="DITERIMA")

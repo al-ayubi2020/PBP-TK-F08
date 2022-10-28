@@ -1,0 +1,109 @@
+<!-- prettier-ignore -->
+{% extends 'base.html' %} 
+{% load static %} 
+{% block meta %}
+<title>Hello, prize!</title>
+<script src="{% static 'js/index_prize_admin.js' %}"></script>
+<!-- prettier-ignore -->
+{% endblock meta %} 
+{% block content %}
+{% include 'adminNavbar.html' %}
+<div>
+  <!-- bikin konten disini -->
+  <div
+    class="p-5 flex space-x-4 md:justify-between w-full flex-col md:flex-row space-y-2 items-center justify-center"
+  >
+    <p class="text-4xl text-center">Prize List</p>
+    <button
+      class="btn btn-wide bg-[#F0F1AB] glass hover:bg-[#F0F1AB] text-black"
+    >
+      <label
+        for="my-modal-4"
+        class="w-full h-full flex items-center justify-center cursor-pointer"
+        >Add</label
+      >
+    </button>
+  </div>
+  <div
+    class="px-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 place-items-center gap-5 pb-32 md:pb-5"
+    id="table"
+  ></div>
+  <!-- akhir konten -->
+  <div>
+    <input type="checkbox" id="my-modal-4" class="modal-toggle" />
+<label for="my-modal-4" class="modal cursor-pointer">
+  <label class="modal-box relative" for="">
+    <label for="my-modal-4" class="btn btn-sm btn-circle absolute right-2 top-2"
+      >✕</label
+    >
+    <h3 class="text-lg font-bold">Tambah Prize</h3>
+    <form action="" id="buatproject">
+      {% csrf_token %}
+      <div class="form-control w-full mb-5 mt-5">
+        <label class="label">
+          <span class="label-text">Nama / Judul</span>
+        </label>
+        {{ form.nama }}
+        <!-- <input
+          required
+          type="text"
+          placeholder="Masukan nama hadiah"
+          class="input input-bordered w-full"
+          id="nama"
+        /> -->
+      </div>
+      <div class="form-control w-full mb-5">
+        <label class="label">
+          <span class="label-text">Poin</span>
+        </label>
+        {{ form.poin }}
+        <!-- <input
+          required
+          type="number"
+          placeholder="Masukan poin"
+          class="input input-bordered w-full"
+          id="poin"
+        /> -->
+      </div>
+      <div class="form-control w-full mb-5">
+        <label class="label">
+          <span class="label-text">Stok</span>
+        </label>
+        {{ form.stok }}
+        <!-- <input
+          required
+          type="number"
+          placeholder="Tentukan stok"
+          class="input input-bordered w-full"
+          id="stok"
+        /> -->
+      </div>
+      <div class="form-control w-full mb-5">
+        <label class="label">
+          <span class="label-text">Deskripsi</span>
+        </label>
+        {{ form.desc }}
+        <!-- <textarea class="textarea textarea-bordered" placeholder="Deskripsi" id="desc" required></textarea> -->
+
+      <div class="w-full flex justify-end">
+        <button
+          class="btn btn-active btn-primary modal-action"
+          type="submit"
+          id="button"
+        >
+          <label
+            for="my-modal-4"
+            class="w-full h-full flex items-center justify-center cursor-pointer"
+            >Submit</label
+          >
+        </button>
+      </div>
+    </form>
+  </label>
+</label>
+  </div>
+</div>
+
+<!-- prettier-ignore -->
+{% include 'prizeBottomNavAdmin.html' %} 
+{% endblock content %}

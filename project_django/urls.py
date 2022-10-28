@@ -20,9 +20,9 @@ urlpatterns = [
     path('secret/', admin.site.urls),
     path('', include('landing_page.urls')),
     path('dashboard/', include('user_dashboard.urls')),
-    path('dashboard/prize', include('prize.urls')),
-    path('dashboard/withdraw', include('withdraw.urls')),
-    path('dashboard/deposit', include('deposit.urls')),
+    path('prize/', include('prize.urls')),
+    path('withdraw/', include('withdraw.urls')),
+    path('deposit/', include('deposit.urls')),
     path('admin/', include('admin_page.urls')),
     path("__reload__/", include("django_browser_reload.urls")),
 ]

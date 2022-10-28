@@ -1112,10 +1112,6 @@ select {
   margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
-.overflow-hidden {
-  overflow: hidden;
-}
-
 .rounded-full {
   border-radius: 9999px;
 }
@@ -1139,6 +1135,11 @@ select {
 .border-gray-400 {
   --tw-border-opacity: 1;
   border-color: rgb(156 163 175 / var(--tw-border-opacity));
+}
+
+.border-red-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity));
 }
 
 .bg-gray-50 {
@@ -1205,8 +1206,9 @@ select {
   background-color: rgb(147 197 253 / var(--tw-bg-opacity));
 }
 
-.bg-\[url\(\.\.\/\.\.\/static\/Garbagehope\.jpg\)\] {
-  background-image: url(../../static/Garbagehope.jpg);
+.bg-\[\#b6c790\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(182 199 144 / var(--tw-bg-opacity));
 }
 
 .bg-\[url\(\.\.\/\.\.\/static\/Garbage\.jpg\)\] {
@@ -1425,9 +1427,9 @@ select {
   color: rgb(225 29 72 / var(--tw-text-opacity));
 }
 
-.text-green-500 {
+.text-\[\#b6c790\] {
   --tw-text-opacity: 1;
-  color: rgb(34 197 94 / var(--tw-text-opacity));
+  color: rgb(182 199 144 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -1498,6 +1500,11 @@ select {
 .active\:text-rose-500:active {
   --tw-text-opacity: 1;
   color: rgb(244 63 94 / var(--tw-text-opacity));
+}
+
+.active\:text-green-300:active {
+  --tw-text-opacity: 1;
+  color: rgb(134 239 172 / var(--tw-text-opacity));
 }
 
 @media (min-width: 640px) {

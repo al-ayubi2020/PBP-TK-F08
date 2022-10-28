@@ -4,7 +4,7 @@ from rolepermissions.decorators import has_role_decorator
 from project_django.roles import commonUser
 from rolepermissions.roles import assign_role, get_user_roles
 from rolepermissions.checkers import has_role
-from landing_page.models import UserData
+from admin_page.models import UserData
 
 @login_required(login_url='/login/')
 def index(request):

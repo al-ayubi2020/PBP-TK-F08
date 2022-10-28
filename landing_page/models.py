@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-# Create your models here.
 
-class UserData(models.Model):
+
+class Testimoni(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    poin = models.BigIntegerField(default=0)
-    balance = models.BigIntegerField(default=0)
+    username = models.TextField(default='')
+    desc = models.TextField()

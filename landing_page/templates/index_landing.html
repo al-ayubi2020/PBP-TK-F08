@@ -3,6 +3,7 @@
 {% load static %} 
 {% block meta %}
 <title>Hello, Landing!</title>
+<script src="{% static 'js/index_landing.js' %}"></script>
 <!-- prettier-ignore -->
 {% endblock meta %} 
 {% block content %}
@@ -11,28 +12,331 @@
 {% else %}
 {% include 'navbar.html' %}
 {% endif %}
-{% include 'loginModal.html' %}
-<div class="min-h-screen">
+<div class="min-h-screen pb-20">
   <!-- bikin content disini -->
-  <div
-    class="hero min-h-screen"
-    style="background-image: url(../../static/Garbagehope.jpg)"
+  <section
+    class="relative bg-[url(../../static/Garbagehope.jpg)] bg-cover bg-center bg-no-repeat"
   >
-    <div class="hero-overlay bg-opacity-60"></div>
-    <div class="hero-content text-center text-neutral-content">
-      <div class="max-w-md">
-        <h1 class="mb-5 text-5xl font-bold">Hello there</h1>
-        <p class="mb-5">
-          Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-          excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a
-          id nisi.
+    <div
+      class="absolute inset-0 bg-white/75 sm:bg-transparent sm:bg-gradient-to-r sm:from-white/95 sm:to-white/25"
+    ></div>
+
+    <div
+      class="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8"
+    >
+      <div class="max-w-xl text-center sm:text-left">
+        <h1 class="text-3xl font-extrabold sm:text-5xl">
+          WELCOME TO
+
+          <strong class="block font-extrabold text-rose-700">
+            TrashSure
+          </strong>
+        </h1>
+
+        <p class="mt-4 max-w-lg sm:text-xl sm:leading-relaxed">
+          Pengelolaan dan penyetoran pada bank sampah menjadi lebih mudah.
         </p>
-        <button class="btn btn-primary">Get Started</button>
+
+        <div class="mt-8 flex flex-wrap gap-4 text-center">
+          <a
+            href="/login/"
+            class="block w-full rounded bg-rose-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-rose-700 focus:outline-none focus:ring active:bg-rose-500 sm:w-auto"
+          >
+            Login
+          </a>
+
+          <button
+            id="scroll"
+            onclick="scrollDown()"
+            class="block w-full rounded bg-white px-12 py-3 text-sm font-medium text-rose-600 shadow hover:text-rose-700 focus:outline-none focus:ring active:text-rose-500 sm:w-auto"
+          >
+            Pelajari Lebih Lanjut
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div
+    id="fitur"
+    class="w-full flex flex-col items-center justify-center lg:px-20 space-y-12 min-h-screen px-3"
+  >
+    <p class="text-3xl font-extrabold text-center">
+      Mengapa harus menggunakan TrashSure?
+    </p>
+    <div
+      class="w-full grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 gap-x-5 gap-y-10"
+    >
+      <div class="flex w-full space-x-3">
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-12 h-12"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
+            />
+          </svg>
+        </div>
+        <div class="space-y-2">
+          <p class="font-bold text-xl tracking-widest">PRAKTIS</p>
+          <p>
+            Pengelolaan data dilakukan secara digital & dapat meningkatkan
+            paperless activity.
+          </p>
+        </div>
+      </div>
+      <div class="flex w-full space-x-3">
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-12 h-12"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9zm3.75 11.625a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
+            />
+          </svg>
+        </div>
+        <div class="space-y-2">
+          <p class="font-bold text-xl tracking-widest">TRANSPARAN</p>
+          <p>
+            Pengelola Bank Sampah dapat mengelola tabungan nasabah secara
+            transparan.
+          </p>
+        </div>
+      </div>
+      <div class="flex w-full space-x-3">
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-12 h-12"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+            />
+          </svg>
+        </div>
+        <div class="space-y-2">
+          <p class="font-bold text-xl tracking-widest">AMAN</p>
+          <p>
+            Pengelolaan data dilakukan secara aman dan rahasia untuk segala
+            transaksi.
+          </p>
+        </div>
+      </div>
+      <div class="flex w-full space-x-3">
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-12 h-12"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"
+            />
+          </svg>
+        </div>
+        <div class="space-y-2">
+          <p class="font-bold text-xl tracking-widest">MOBILE SUPPORT</p>
+          <p>
+            Bank Sampah dapat melakukan transaksi dengan mudah dan nyaman melaui
+            web yang sudah mobile support.
+          </p>
+        </div>
+      </div>
+      <div class="flex w-full space-x-3">
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-12 h-12"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
+            />
+          </svg>
+        </div>
+        <div class="space-y-2">
+          <p class="font-bold text-xl tracking-widest">TERINTEGRASI</p>
+          <p>
+            Data Bank Sampah yang tergabung sudah terintegrasi sehingga
+            memudahkan proses pemantauan pengelolaan sampah & perencanaan
+            pengembangan Bank Sampah.
+          </p>
+        </div>
+      </div>
+      <div class="flex w-full space-x-3">
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-12 h-12"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+            />
+          </svg>
+        </div>
+        <div class="space-y-2">
+          <p class="font-bold text-xl tracking-widest">SISTEM POIN</p>
+          <p>
+            Selain menukarkan sampah jenis tertentu dengan uang, TrashSure juga
+            memberikan poin yang dapat anda kumpulkan dan tukarkan kemudain
+            dengan beberapa hadiah menarik yang tersedia.
+          </p>
+        </div>
       </div>
     </div>
   </div>
+  <div class="w-full flex flex-col items-center lg:px-20 space-y-5 px-3 pt-24">
+    <p class="text-3xl font-extrabold text-center">Testimoni User TrashSure</p>
+    {% if isLogin %}
+    <button
+      for="my-modal-4"
+      class="btn btn-wide bg-[#F0F1AB] glass hover:bg-[#F0F1AB] text-black"
+    >
+      <label
+        for="my-modal-4"
+        class="w-full h-full flex items-center justify-center cursor-pointer"
+        >Add</label
+      >
+    </button>
+    {% else %}
+    <button
+      for="my-modal-4"
+      class="btn bg-[#F0F1AB] glass hover:bg-[#F0F1AB] text-black"
+    >
+      <a
+        href="/login/"
+        class="w-full h-full flex items-center justify-center cursor-pointer"
+        >Login untuk memberikan testimoni</a
+      >
+    </button>
+    {% endif %}
+
+    <div
+      class="px-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 place-items-center gap-5 pb-32 md:pb-5 pt-10"
+      id="table"
+    ></div>
+  </div>
   <!-- akhir content -->
 </div>
+<footer class="footer p-10 bg-neutral text-neutral-content pb-24 md:pb-10">
+  <div>
+    <img src="../../static/bin.png" alt="" class="h-10 w-10" />
+    <p>TrashSure<br />Providing since 1992</p>
+  </div>
+  <div>
+    <span class="footer-title">Social</span>
+    <div class="grid grid-flow-col gap-4">
+      <a
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          class="fill-current"
+        >
+          <path
+            d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
+          ></path></svg
+      ></a>
+      <a
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          class="fill-current"
+        >
+          <path
+            d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"
+          ></path></svg
+      ></a>
+      <a
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          class="fill-current"
+        >
+          <path
+            d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"
+          ></path></svg
+      ></a>
+    </div>
+  </div>
+</footer>
+
+<input type="checkbox" id="my-modal-4" class="modal-toggle" />
+<label for="my-modal-4" class="modal cursor-pointer">
+  <label class="modal-box relative" for="">
+    <label for="my-modal-4" class="btn btn-sm btn-circle absolute right-2 top-2"
+      >✕</label
+    >
+    <h3 class="text-lg font-bold">Tambah Testimoni</h3>
+    <form action="" id="buatproject">
+      {% csrf_token %}
+      <div class="form-control w-full mt-5">
+        <label class="label">
+          <span class="label-text">Testimoni</span>
+        </label>
+        {{ form.desc }}
+        <!-- <select class="select select-bordered w-full" id="jenisSampah">
+          <option disabled selected>Pilih Jenis Sampah</option>
+          <option value="PLASTIK">Plastik</option>
+          <option value="ELEKTRONIK">Elektronik</option>
+        </select> -->
+      </div>
+      <div class="w-full flex justify-end">
+        <button
+          class="btn btn-active btn-primary modal-action"
+          type="submit"
+          id="button"
+        >
+          <label
+            for="my-modal-4"
+            class="w-full h-full flex items-center justify-center cursor-pointer"
+            >Submit</label
+          >
+        </button>
+      </div>
+    </form>
+  </label>
+</label>
 <!-- prettier-ignore -->
 {% if isLogin %}
 {% include 'landingBottomNav.html' %}

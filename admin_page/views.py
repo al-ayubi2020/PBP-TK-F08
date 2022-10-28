@@ -19,7 +19,7 @@ from rolepermissions.checkers import has_role
 from deposit.models import Deposit
 from prize.models import Prize
 
-from landing_page.models import UserData
+from admin_page.models import UserData
 
 from .forms import *
 

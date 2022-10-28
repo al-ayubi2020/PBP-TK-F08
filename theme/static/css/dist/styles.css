@@ -925,6 +925,10 @@ select {
   height: 1.25rem;
 }
 
+.h-60 {
+  height: 15rem;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -961,6 +965,10 @@ select {
 
 .w-5 {
   width: 1.25rem;
+}
+
+.w-60 {
+  width: 15rem;
 }
 
 .max-w-screen-xl {
@@ -1102,6 +1110,10 @@ select {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
   margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 
 .rounded-full {
@@ -1613,6 +1625,12 @@ select {
 @media (min-width: 1280px) {
   .xl\:w-96 {
     width: 24rem;
+  }
+
+  .xl\:w-fit {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
   }
 
   .xl\:grid-cols-3 {

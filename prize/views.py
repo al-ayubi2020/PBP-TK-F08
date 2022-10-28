@@ -11,7 +11,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 from admin_page.models import Prize
 from .models import RedeemedPrize
-from landing_page.models import UserData
+from admin_page.models import UserData
 
 
 @login_required(login_url='/login/')

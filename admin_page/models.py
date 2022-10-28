@@ -10,3 +10,8 @@ class Prize(models.Model):
     poin = models.BigIntegerField()
     stok = models.BigIntegerField()
     desc = models.TextField(default="")
+
+class UserData(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    poin = models.BigIntegerField(default=0)
+    balance = models.BigIntegerField(default=0)

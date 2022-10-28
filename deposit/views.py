@@ -11,7 +11,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 import math
 
 from deposit.models import Deposit
-from landing_page.models import UserData
+from admin_page.models import UserData
 
 from .forms import DepositForm
 

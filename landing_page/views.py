@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http.response import JsonResponse
 import datetime
-from landing_page.models import UserData
+from admin_page.models import UserData
 from rolepermissions.checkers import has_role
 
 from rolepermissions.roles import assign_role, get_user_roles
@@ -35,7 +35,7 @@ def register(request):
         password = request.POST.get('password')
         form = UserCreationForm(request.POST)
         if username and password:
-            # try:
+            try:
                 acc = User.objects.create(username=username)
                 if acc:
                     acc.set_password(password)
@@ -46,8 +46,8 @@ def register(request):
                     return redirect('landing_page:login')
                 else:
                     messages.success(request, 'Terjadi masalah!')
-            # except:
-            #     messages.success(request, 'Username sudah pernah digunakan!')
+            except:
+                messages.success(request, 'Username sudah pernah digunakan!')
         else:
             messages.success(request, 'Tidak boleh kosong!')
 

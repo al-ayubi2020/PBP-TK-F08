@@ -1347,6 +1347,10 @@ select {
   padding-top: 6rem;
 }
 
+.pb-24 {
+  padding-bottom: 6rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -1614,6 +1618,14 @@ select {
 
   .md\:pb-5 {
     padding-bottom: 1.25rem;
+  }
+
+  .md\:pb-0 {
+    padding-bottom: 0px;
+  }
+
+  .md\:pb-10 {
+    padding-bottom: 2.5rem;
   }
 }
 

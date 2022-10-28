@@ -9,7 +9,7 @@ from django.core import serializers
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from withdraw.models import Withdraw
-from landing_page.models import UserData
+from admin_page.models import UserData
 
 from .forms import WithdrawForm
 

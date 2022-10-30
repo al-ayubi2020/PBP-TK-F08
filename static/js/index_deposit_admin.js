@@ -131,17 +131,31 @@ $(document).on("submit", "#buatproject", function (e) {
       document.getElementById("user").value = "";
       document.getElementById("id_jenisSampah").value = "";
       document.getElementById("id_beratSampah").value = "";
-      $.toast({
-        text: "Deposit Dibuat",
-        showHideTransition: "fade", // It can be plain, fade or slide
-        bgColor: "#23B65D", // Background color for toast
-        textColor: "#eee", // text color
-        allowToastClose: false, // Show the close button or not
-        hideAfter: 2000, // `false` to make it sticky or time in miliseconds to hide after
-        stack: 5, // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
-        textAlign: "left", // Alignment of text i.e. left, right, center
-        position: "bottom-right", // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
-      });
+      if (data.instance == "Deposit diajukan") {
+        $.toast({
+          text: "Deposit berhasil dibuat",
+          showHideTransition: "fade", // It can be plain, fade or slide
+          bgColor: "#23B65D", // Background color for toast
+          textColor: "#eee", // text color
+          allowToastClose: false, // Show the close button or not
+          hideAfter: 2000, // `false` to make it sticky or time in miliseconds to hide after
+          stack: 5, // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
+          textAlign: "left", // Alignment of text i.e. left, right, center
+          position: "bottom-right", // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
+        });
+      } else {
+        $.toast({
+          text: "Input tidak valid",
+          showHideTransition: "fade", // It can be plain, fade or slide
+          bgColor: "#E01A31", // Background color for toast
+          textColor: "#eee", // text color
+          allowToastClose: false, // Show the close button or not
+          hideAfter: 2000, // `false` to make it sticky or time in miliseconds to hide after
+          stack: 5, // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
+          textAlign: "left", // Alignment of text i.e. left, right, center
+          position: "bottom-right", // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
+        });
+      }
     },
   });
 });

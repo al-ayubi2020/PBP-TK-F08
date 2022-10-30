@@ -94,7 +94,7 @@ def add_deposit(request):
                 userdata.poin += poin
                 userdata.balance += totalHarga
                 userdata.save()
-                return JsonResponse({"instance": "Deposit Diajukan"}, status=200) 
+                return JsonResponse({"instance": "Deposit diajukan"}, status=200) 
             return JsonResponse({"instance": "Input tidak valid"}, status=200) 
         return redirect('admin_page:deposit')
     return redirect('/admin/login/')

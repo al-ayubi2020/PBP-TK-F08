@@ -57,7 +57,7 @@ def add(request):
                 poin = totalHarga // 1000
                 deposit = Deposit(beratSampah=beratSampah, jenisSampah=jenisSampah, totalHarga=totalHarga, poin=poin, user=user, username=user.username, isApprove="PENDING")
                 deposit.save()
-                return JsonResponse({"instance": "Deposit Diajukan"}, status=200) 
+                return JsonResponse({"instance": "Deposit diajukan"}, status=200) 
             return JsonResponse({"instance": "Input tidak valid"}, status=200) 
         return redirect('deposit:index')
     return redirect('/login/')

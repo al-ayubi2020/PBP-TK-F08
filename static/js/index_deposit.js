@@ -75,7 +75,7 @@ $(document).on("submit", "#buatproject", function (e) {
       document.getElementById("id_beratSampah").value = "";
       if (data.instance == "Deposit diajukan") {
         $.toast({
-          text: "Deposit Berhasil Diajukan",
+          text: "Deposit berhasil diajukan",
           showHideTransition: "fade", // It can be plain, fade or slide
           bgColor: "#23B65D", // Background color for toast
           textColor: "#eee", // text color

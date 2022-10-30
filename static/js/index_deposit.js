@@ -27,7 +27,6 @@ function show2(data) {
     `;
   }
 
-  console.log("show2");
   document.getElementById("table").innerHTML = tab;
 }
 
@@ -61,8 +60,6 @@ $(document).ready(function () {
 
 $(document).on("submit", "#buatproject", function (e) {
   e.preventDefault();
-  console.log($("#id_jenisSampah").val());
-  console.log($("#id_beratSampah").val());
   $.ajax({
     type: "POST",
     url: "/deposit/add/",
@@ -76,18 +73,31 @@ $(document).on("submit", "#buatproject", function (e) {
       loadData2();
       document.getElementById("id_jenisSampah").value = "";
       document.getElementById("id_beratSampah").value = "";
-      console.log(data);
-      $.toast({
-        text: "Deposit Berhasil Diajukan",
-        showHideTransition: "fade", // It can be plain, fade or slide
-        bgColor: "#23B65D", // Background color for toast
-        textColor: "#eee", // text color
-        allowToastClose: false, // Show the close button or not
-        hideAfter: 2000, // `false` to make it sticky or time in miliseconds to hide after
-        stack: 5, // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
-        textAlign: "left", // Alignment of text i.e. left, right, center
-        position: "bottom-right", // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
-      });
+      if (data.instance == "Deposit diajukan") {
+        $.toast({
+          text: "Deposit Berhasil Diajukan",
+          showHideTransition: "fade", // It can be plain, fade or slide
+          bgColor: "#23B65D", // Background color for toast
+          textColor: "#eee", // text color
+          allowToastClose: false, // Show the close button or not
+          hideAfter: 2000, // `false` to make it sticky or time in miliseconds to hide after
+          stack: 5, // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
+          textAlign: "left", // Alignment of text i.e. left, right, center
+          position: "bottom-right", // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
+        });
+      } else {
+        $.toast({
+          text: "Input tidak valid",
+          showHideTransition: "fade", // It can be plain, fade or slide
+          bgColor: "#E01A31", // Background color for toast
+          textColor: "#eee", // text color
+          allowToastClose: false, // Show the close button or not
+          hideAfter: 2000, // `false` to make it sticky or time in miliseconds to hide after
+          stack: 5, // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
+          textAlign: "left", // Alignment of text i.e. left, right, center
+          position: "bottom-right", // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
+        });
+      }
     },
   });
 });

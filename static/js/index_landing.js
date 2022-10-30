@@ -15,7 +15,6 @@ function show(data) {
       `;
   }
 
-  console.log("show");
   document.getElementById("table").innerHTML = tab;
 }
 
@@ -60,7 +59,6 @@ $(document).on("submit", "#buatproject", function (e) {
     success: function (data) {
       loadData();
       document.getElementById("id_desc").value = "";
-      console.log(data.instance);
       if (data.instance == "Sudah pernah memberikan testimoni") {
         $.toast({
           text: "Sudah pernah memberikan testimoni",
@@ -91,6 +89,5 @@ $(document).on("submit", "#buatproject", function (e) {
 });
 
 function scrollDown() {
-  console.log("click");
   document.getElementById("fitur").scrollIntoView({ behavior: "smooth" });
 }

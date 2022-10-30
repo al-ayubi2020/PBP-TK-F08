@@ -2,7 +2,6 @@ let count = 0;
 function loadDataNav() {
   $.get("/admin/deposit/get/count/", function (data) {
     count = data;
-    console.log(count);
     showCount();
   });
 }
@@ -22,3 +21,5 @@ function showCount() {
 $(document).ready(function () {
   loadDataNav();
 });
+
+myInterval = setInterval(loadDataNav, 5000);

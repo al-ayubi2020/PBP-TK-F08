@@ -19,7 +19,6 @@ function show(data) {
     `;
   }
 
-  console.log("show");
   document.getElementById("table").innerHTML = tab;
 }
 
@@ -70,7 +69,6 @@ $(document).on("submit", "#buatproject", function (e) {
       document.getElementById("id_poin").value = "";
       document.getElementById("id_stok").value = "";
       document.getElementById("id_desc").value = "";
-      console.log(data);
       $.toast({
         text: data.instance,
         showHideTransition: "fade", // It can be plain, fade or slide

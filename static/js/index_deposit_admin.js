@@ -55,7 +55,6 @@ function show(data) {
       `;
   }
 
-  console.log("show");
   document.getElementById("table").innerHTML = tab;
 }
 
@@ -81,7 +80,6 @@ let count = 0;
 function loadDataNav() {
   $.get("/admin/deposit/get/count/", function (data) {
     count = data;
-    console.log(count);
     showCount();
   });
 }
@@ -133,7 +131,6 @@ $(document).on("submit", "#buatproject", function (e) {
       document.getElementById("user").value = "";
       document.getElementById("id_jenisSampah").value = "";
       document.getElementById("id_beratSampah").value = "";
-      console.log(data);
       $.toast({
         text: "Deposit Dibuat",
         showHideTransition: "fade", // It can be plain, fade or slide
@@ -194,3 +191,5 @@ function delData(id) {
     },
   });
 }
+
+myInterval = setInterval(loadData, 5000);

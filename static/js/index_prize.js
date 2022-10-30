@@ -17,7 +17,6 @@ function showPrizeRedeem(data) {
     `;
   }
 
-  console.log("show");
   document.getElementById("tableRedeem").innerHTML = tab;
 }
 
@@ -66,7 +65,6 @@ function showPrize(data) {
     `;
   }
 
-  console.log("show");
   document.getElementById("table").innerHTML = tab;
 }
 

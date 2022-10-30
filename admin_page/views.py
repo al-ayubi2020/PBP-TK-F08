@@ -80,20 +80,22 @@ def add_deposit(request):
             user = request.POST.get('user')
             jenisSampah = request.POST.get('jenisSampah')
             beratSampah = int(request.POST.get('beratSampah'))
-            userNow = User.objects.get(username=user)
-            totalHarga = 0
-            if jenisSampah == "PLASTIK":
-                totalHarga = beratSampah * HARGA_PLASTIK
-            elif jenisSampah == "ELEKTRONIK":
-                totalHarga = beratSampah * HARGA_ELEKTRONIK
-            poin = totalHarga // 1000
-            deposit = Deposit(beratSampah=beratSampah, jenisSampah=jenisSampah, totalHarga=totalHarga, poin=poin, user=userNow, username=userNow.username, isApprove="DITERIMA")
-            deposit.save()
-            userdata = UserData.objects.get(user=userNow)
-            userdata.poin += poin
-            userdata.balance += totalHarga
-            userdata.save()
-            return JsonResponse({"instance": "Deposit Diajukan"}, status=200) 
+            if (beratSampah > 0):
+                userNow = User.objects.get(username=user)
+                totalHarga = 0
+                if jenisSampah == "PLASTIK":
+                    totalHarga = beratSampah * HARGA_PLASTIK
+                elif jenisSampah == "ELEKTRONIK":
+                    totalHarga = beratSampah * HARGA_ELEKTRONIK
+                poin = totalHarga // 1000
+                deposit = Deposit(beratSampah=beratSampah, jenisSampah=jenisSampah, totalHarga=totalHarga, poin=poin, user=userNow, username=userNow.username, isApprove="DITERIMA")
+                deposit.save()
+                userdata = UserData.objects.get(user=userNow)
+                userdata.poin += poin
+                userdata.balance += totalHarga
+                userdata.save()
+                return JsonResponse({"instance": "Deposit Diajukan"}, status=200) 
+            return JsonResponse({"instance": "Input tidak valid"}, status=200) 
         return redirect('admin_page:deposit')
     return redirect('/admin/login/')
 

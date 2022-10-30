@@ -34,13 +34,15 @@ def add(request):
         if request.method == 'POST':
             jumlah = int(request.POST.get('jumlah'))
             userdata = UserData.objects.get(user=user)
-            if (userdata.balance >= jumlah):
-                withdraw = Withdraw(jumlah=jumlah, user=user)
-                withdraw.save()
-                userdata.balance -= jumlah
-                userdata.save()
-                return JsonResponse({"instance": "Penarikan Berhasil"}, status=200) 
-            return JsonResponse({"instance": "Saldo Kurang"}, status=200) 
+            if (jumlah > 0):
+                if (userdata.balance >= jumlah):
+                    withdraw = Withdraw(jumlah=jumlah, user=user)
+                    withdraw.save()
+                    userdata.balance -= jumlah
+                    userdata.save()
+                    return JsonResponse({"instance": "Penarikan Berhasil"}, status=200) 
+                return JsonResponse({"instance": "Saldo Kurang"}, status=200) 
+            return JsonResponse({"instance": "Input tidak valid"}, status=200) 
         return redirect('withdraw:index')
     return redirect('/login/')
 

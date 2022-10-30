@@ -48,14 +48,16 @@ def add(request):
             user = request.user
             jenisSampah = request.POST.get('jenisSampah')
             beratSampah = int(request.POST.get('beratSampah'))
-            totalHarga = 0
-            if jenisSampah == "Plastik":
-                totalHarga = beratSampah * HARGA_PLASTIK
-            elif jenisSampah == "Elektronik":
-                totalHarga = beratSampah * HARGA_ELEKTRONIK
-            poin = totalHarga // 1000
-            deposit = Deposit(beratSampah=beratSampah, jenisSampah=jenisSampah, totalHarga=totalHarga, poin=poin, user=user, username=user.username, isApprove="PENDING")
-            deposit.save()
-            return JsonResponse({"instance": "Deposit Diajukan"}, status=200) 
+            if (beratSampah > 0):
+                totalHarga = 0
+                if jenisSampah == "Plastik":
+                    totalHarga = beratSampah * HARGA_PLASTIK
+                elif jenisSampah == "Elektronik":
+                    totalHarga = beratSampah * HARGA_ELEKTRONIK
+                poin = totalHarga // 1000
+                deposit = Deposit(beratSampah=beratSampah, jenisSampah=jenisSampah, totalHarga=totalHarga, poin=poin, user=user, username=user.username, isApprove="PENDING")
+                deposit.save()
+                return JsonResponse({"instance": "Deposit Diajukan"}, status=200) 
+            return JsonResponse({"instance": "Input tidak valid"}, status=200) 
         return redirect('deposit:index')
     return redirect('/login/')

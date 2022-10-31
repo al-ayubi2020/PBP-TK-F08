@@ -26,7 +26,7 @@
     >
       <div class="max-w-xl text-center sm:text-left">
         <h1 class="text-3xl font-extrabold sm:text-5xl">
-          WELCOME TO
+          Build Better Environtment And Economy With
 
           <strong class="block font-extrabold text-[#b6c790]">
             TrashSure
@@ -34,7 +34,8 @@
         </h1>
 
         <p class="mt-4 max-w-lg sm:text-xl sm:leading-relaxed">
-          Pengelolaan dan penyetoran pada bank sampah menjadi lebih mudah.
+          Tahukah anda jika sampah yang ada <br> di rumahmu dapat diubah menjadi <br> imbalan? <br>
+          TrashSure hadir sebagai solusi digital <br> untuk mengorganisir sampah secara <br> efektif dengan imbalan yang menarik!
         </p>
 
         <div class="mt-8 flex flex-wrap gap-4 text-center">
@@ -221,6 +222,65 @@
       </div>
     </div>
   </div>
+  <div
+    class="w-full flex flex-col items-center justify-center lg:px-20 space-y-12 max-w-[2560px] px-3 pt-20 lg:py-20"
+  >
+  <p class="text-3xl font-extrabold text-center">
+    Fitur yang ditawarkan TrashSure
+  </p>
+  <br></br>
+  <div class="w-full grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 gap-x-5 gap-y-10">
+    <div class="flex w-full space-x-3">
+      <div>
+        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+      </div>
+      <div class="space-y-2">
+        <p class="font-bold text-xl tracking-widest">DEPOSIT</p>
+        <p>
+          Setorkan sampah elektronik atau plastik ke TrashSure. Setorkan sampah anda untuk mendapatkan point sesuai jumlah sampah yang disetorkan!
+        </p>
+      </div>
+    </div>
+    <div class="flex w-full space-x-3">
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+        </svg>
+        
+      </div>
+      <div class="space-y-2">
+        <p class="font-bold text-xl tracking-widest">WITHDRAW</p>
+        <p>
+          Tarik point yang anda dapat dengan withdraw untuk mendapatkan imbalan dan prize!
+        </p>
+      </div>
+    </div>
+    <div class="flex w-full space-x-3">
+      <div>
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-12 h-12"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+            />
+          </svg>
+      </div>
+      <div class="space-y-2">
+        <p class="font-bold text-xl tracking-widest">REEDEM POINT</p>
+        <p>
+          Tukarlah dan redeem point yang anda dapat untuk mendapatkan imbalan dan prize menarik!
+        </p>
+      </div>
+    </div>
+  </div>
+  </div>
   <div class="w-full flex flex-col items-center lg:px-20 space-y-5 px-3 pt-24">
     <p class="text-3xl font-extrabold text-center">Testimoni User TrashSure</p>
     {% if isLogin %}
@@ -316,11 +376,6 @@
           <span class="label-text">Testimoni</span>
         </label>
         {{ form.desc }}
-        <!-- <select class="select select-bordered w-full" id="jenisSampah">
-          <option disabled selected>Pilih Jenis Sampah</option>
-          <option value="PLASTIK">Plastik</option>
-          <option value="ELEKTRONIK">Elektronik</option>
-        </select> -->
       </div>
       <div class="w-full flex justify-end">
         <button

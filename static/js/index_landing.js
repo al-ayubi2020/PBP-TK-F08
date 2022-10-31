@@ -89,5 +89,9 @@ $(document).on("submit", "#buatproject", function (e) {
 });
 
 function scrollDown() {
-  document.getElementById("fitur").scrollIntoView({ behavior: "smooth" });
-}
+    if (document.getElementById("scroll2")){
+    document.getElementById("fitur").scrollIntoView({ behavior: "smooth" });
+    }else if (document.getElementById("scroll")){
+      document.getElementById("testimoni").scrollIntoView({ behavior: "smooth" });
+    }
+  }

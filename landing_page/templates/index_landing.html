@@ -37,7 +37,17 @@
           Tahukah anda jika sampah yang ada <br> di rumahmu dapat diubah menjadi <br> imbalan? <br>
           TrashSure hadir sebagai solusi digital <br> untuk mengorganisir sampah secara <br> efektif dengan imbalan yang menarik!
         </p>
-
+        {% if isLogin %}
+        <div class="mt-8 flex flex-wrap gap-4 text-center">
+          <button
+            id="scroll"
+            onclick="scrollDown()"
+            class="block w-full rounded bg-white px-12 py-3 text-sm font-medium text-[#b6c790] shadow sm:w-auto"
+          >
+            Tambahkan testimoni anda!
+          </button>
+        </div>
+        {% else %}
         <div class="mt-8 flex flex-wrap gap-4 text-center">
           <a
             href="/login/"
@@ -47,13 +57,14 @@
           </a>
 
           <button
-            id="scroll"
+            id="scroll2"
             onclick="scrollDown()"
             class="block w-full rounded bg-white px-12 py-3 text-sm font-medium text-[#b6c790] shadow sm:w-auto"
           >
             Pelajari Lebih Lanjut
           </button>
         </div>
+        {% endif %}
       </div>
     </div>
   </section>
@@ -281,7 +292,7 @@
     </div>
   </div>
   </div>
-  <div class="w-full flex flex-col items-center lg:px-20 space-y-5 px-3 pt-24">
+  <div id="testimoni" class="w-full flex flex-col items-center lg:px-20 space-y-5 px-3 pt-24">
     <p class="text-3xl font-extrabold text-center">Testimoni User TrashSure</p>
     {% if isLogin %}
     <button

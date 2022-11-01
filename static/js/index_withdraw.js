@@ -1,14 +1,14 @@
 const table = (data) => `
-  <tr>
-    <td> ${data.fields.date} </td>
-    <td> ${data.fields.jumlah} </td>
-  </tr>`
+  `;
 
 function show(data) {
+  let tab = "";
   for (let r of data) {
     tab += `
-    $('#parent').append($('<tr><td>' + ${r.fields.date} + '</td>   <td>' + ${r.fields.jumlah} + '</td></tr>'))
-    `;
+    <tr>
+      <td> ${r.fields.date} </td>
+      <td> ${r.fields.jumlah} </td>
+    </tr>`;
   }
 
   document.getElementById("table").innerHTML = tab;
@@ -71,7 +71,7 @@ $(document).on("submit", "#buatproject", function (e) {
         $.toast({
           text: "Input tidak valid",
           showHideTransition: "fade", // It can be plain, fade or slide
-          bgColor: "#23B65D", // Background color for toast
+          bgColor: "#E01A31", // Background color for toast
           textColor: "#eee", // text color
           allowToastClose: false, // Show the close button or not
           hideAfter: 2000, // `false` to make it sticky or time in miliseconds to hide after

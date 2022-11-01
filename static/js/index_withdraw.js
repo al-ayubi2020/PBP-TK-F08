@@ -1,18 +1,18 @@
-function show(data) {
-  $(data).each(function(i, withdraw) {
-    if (withdraw.fields.status == false) {
-      $('#parent').append($('<tr><td>' + withdraw.fields.date + '</td>   <td>' + withdraw.fields.amount + '</td></tr>'))
-    } else {
-      $('#parent').append($('<tr><td>' + withdraw.fields.date + '</td>   <td>' + withdraw.fields.amount + '</td></tr>'))
-    }
-  });
-}
-
 const table = (data) => `
   <tr>
     <td> ${data.fields.date} </td>
-    <td> ${data.fields.amount} </td>
+    <td> ${data.fields.jumlah} </td>
   </tr>`
+
+function show(data) {
+  for (let r of data) {
+    tab += `
+    $('#parent').append($('<tr><td>' + ${r.fields.date} + '</td>   <td>' + ${r.fields.jumlah} + '</td></tr>'))
+    `;
+  }
+
+  document.getElementById("table").innerHTML = tab;
+}
 
 function getCookie(name) {
   var cookieValue = null;

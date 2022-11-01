@@ -1304,6 +1304,11 @@ select {
   padding-bottom: 0.5rem;
 }
 
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
 .pb-20 {
   padding-bottom: 5rem;
 }

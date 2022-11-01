@@ -1,6 +1,3 @@
-const table = (data) => `
-  `;
-
 function show(data) {
   let tab = "";
   for (let r of data) {

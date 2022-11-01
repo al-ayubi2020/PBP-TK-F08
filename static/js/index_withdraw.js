@@ -1,22 +1,18 @@
 function show(data) {
-  tab = ``;
-
-  for (let r of data) {
-    tab += `
-      <div
-  class="card w-full md:w-80 lg:w-96 bg-[#7E93BE] hover:bg-[#7E93BE] text-black glass"
->
-  <div class="card-body">
-    <h2 class="card-title">${r.fields.date}</h2>
-    <p class="font-bold">${r.fields.jumlah}</p>
-  </div>
-</div>
-
-    `;
-  }
-
-  document.getElementById("table").innerHTML = tab;
+  $(data).each(function(i, withdraw) {
+    if (withdraw.fields.status == false) {
+      $('#parent').append($('<tr><td>' + withdraw.fields.date + '</td>   <td>' + withdraw.fields.amount + '</td></tr>'))
+    } else {
+      $('#parent').append($('<tr><td>' + withdraw.fields.date + '</td>   <td>' + withdraw.fields.amount + '</td></tr>'))
+    }
+  });
 }
+
+const table = (data) => `
+  <tr>
+    <td> ${data.fields.date} </td>
+    <td> ${data.fields.amount} </td>
+  </tr>`
 
 function getCookie(name) {
   var cookieValue = null;

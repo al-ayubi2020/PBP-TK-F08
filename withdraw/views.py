@@ -20,8 +20,10 @@ def index(request):
     role = get_user_roles(user)
     if (has_role(user, commonUser)):
         form = WithdrawForm()
+        userdata = UserData.objects.get(user=user)
         context = {
-            'form' : form
+            'form' : form,
+            'balance': userdata.balance
         }
         return render(request, 'index_withdraw.html', context)
     return redirect('/login/')

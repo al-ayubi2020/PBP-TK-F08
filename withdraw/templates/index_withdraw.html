@@ -21,7 +21,7 @@
         <div class="acc-sumary">
           <!-- <h3 class="material-icons">account_balance_wallet</h3> -->
           <h3>Balance</h3>
-          <h2><b>Rp 10.000</b><h2>
+          <h2><b>Rp {{balance}}</b><h2>
         </div>
       </div>
     </aside>
@@ -56,12 +56,6 @@
                 <span class="label-text">Jumlah Penarikan</span>
               </label>
               {{ form.jumlah }}
-              <!-- <input
-                type="number"
-                placeholder="Rupiah"
-                class="input input-bordered w-full"
-                id="jumlah"
-              /> -->
             </div>
             <div class="w-full flex justify-end">
               <button

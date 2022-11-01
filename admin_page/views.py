@@ -189,7 +189,7 @@ def register(request):
     if request.method == "POST" and form.is_valid:
         username = request.POST.get('username')
         password = request.POST.get('password')
-        form = UserCreationForm(request.POST)
+        form = RegisterForm(request.POST)
         if username and password:
             try:
                 acc = User.objects.create(username=username)

@@ -5,23 +5,23 @@
 <title>Withdraw - TrashSure</title>
 
 <script src="{% static 'js/index_withdraw.js' %}"></script>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!-- prettier-ignore -->
 {% endblock meta %} 
 {% block content %}
 {% include 'userNavbar.html' %}
-
 
 <div>
   <!-- bikin konten disini -->
   <div class="container">
     <aside>
       <div class="p-4 sidebar">
-        <div class="acc-sumary">
+        <div class="acc-sumary" id="side-bal">
           <!-- <h3 class="material-icons">account_balance_wallet</h3> -->
-          <h3>Balance</h3>
-          <h2><b>Rp {{balance}}</b><h2>
         </div>
       </div>
     </aside>
@@ -50,48 +50,46 @@
               <th>Amount</th>
             </tr>
           </thead>
-          <tbody id="table">
-            
-          </tbody>
+          <tbody id="table"></tbody>
         </table>
       </div>
     </main>
   </div>
   <!-- akhir konten -->
 </div>
-<link rel="stylesheet" href="{% static 'css/withdraw.css' %}">
+<link rel="stylesheet" href="{% static 'css/withdraw.css' %}" />
 
 <input type="checkbox" id="my-modal-4" class="modal-toggle" />
-      <label for="my-modal-4" class="modal cursor-pointer">
-        <label class="modal-box relative" for="">
-          <label for="my-modal-4" class="btn btn-sm btn-circle absolute right-2 top-2"
-            >✕</label
-          >
-          <h3 class="text-lg font-bold">Tarik Saldo</h3>
-          <form action="" id="buatproject" for="my-modal-4">
-            {% csrf_token %}
-            <div class="form-control w-full my-5">
-              <label class="label">
-                <span class="label-text">Jumlah Penarikan</span>
-              </label>
-              {{ form.jumlah }}
-            </div>
-            <div class="w-full flex justify-end">
-              <button
-                class="btn btn-active btn-primary modal-action"
-                type="submit"
-                id="button"
-              >
-                <label
-                  for="my-modal-4"
-                  class="w-full h-full flex items-center justify-center cursor-pointer"
-                  >Submit</label
-                >
-              </button>
-            </div>
-          </form>
+<label for="my-modal-4" class="modal cursor-pointer">
+  <label class="modal-box relative" for="">
+    <label for="my-modal-4" class="btn btn-sm btn-circle absolute right-2 top-2"
+      >✕</label
+    >
+    <h3 class="text-lg font-bold">Tarik Saldo</h3>
+    <form action="" id="buatproject" for="my-modal-4">
+      {% csrf_token %}
+      <div class="form-control w-full my-5">
+        <label class="label">
+          <span class="label-text">Jumlah Penarikan</span>
         </label>
-      </label>
+        {{ form.jumlah }}
+      </div>
+      <div class="w-full flex justify-end">
+        <button
+          class="btn btn-active btn-primary modal-action"
+          type="submit"
+          id="button"
+        >
+          <label
+            for="my-modal-4"
+            class="w-full h-full flex items-center justify-center cursor-pointer"
+            >Submit</label
+          >
+        </button>
+      </div>
+    </form>
+  </label>
+</label>
 
 <!-- prettier-ignore -->
 {% include 'withdrawBottomNav.html' %} 

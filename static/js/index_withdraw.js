@@ -11,6 +11,18 @@ function show(data) {
   document.getElementById("table").innerHTML = tab;
 }
 
+function show1(data) {
+  let tab = "";
+  for (let r of data) {
+    tab = `
+    <h3>Balance</h3>
+    <h2><b>Rp ${r.fields.balance}</b><h2>
+    `;
+  }
+
+  document.getElementById("side-bal").innerHTML = tab;
+}
+
 function getCookie(name) {
   var cookieValue = null;
   if (document.cookie && document.cookie != "") {
@@ -32,7 +44,11 @@ var csrftoken = getCookie("csrftoken");
 function loadData() {
   $.get("/withdraw/get/", function (data) {
     show(data);
-  });
+  }).then(
+    $.get("/dashboard/userData/", function (data) {
+      show1(data);
+    })
+  );
 }
 
 $(document).ready(function () {

@@ -11,10 +11,21 @@
 <div>
   <!-- bikin konten disini -->
   <div>
-    <a type="button" href="{% url 'prize:index_redeem' %}" style="color: aqua; padding-left: 30px; padding-top: 30px;">Your Prize</a>
+    <a type="button" href="{% url 'prize:index_redeem' %}" style="padding-left: 30px; padding-top: 30px;">
+      <button
+      for="my-modal-4"
+      class="btn bg-[#0B8297] glass hover:bg-[#F0F1AB] text-black"
+      >
+        <label
+          for="my-modal-4"
+          class="w-full h-full flex items-center justify-center cursor-pointer"
+          >Your Prize</label
+        >
+      </button>
+    </a>
   </div>
   <div>
-    <p style="text-align: center; font-size: larger; padding-bottom: 15px;color: aqua;">Redeem The Prize</p>
+    <p class="text-4xl text-center" style="padding-bottom: 30px; color: azure;">Prize List</p>
   </div>
 
   <div class="container">

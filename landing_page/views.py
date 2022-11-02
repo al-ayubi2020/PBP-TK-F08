@@ -45,10 +45,8 @@ def register(request):
                     return redirect('landing_page:login')
                 else:
                     messages.success(request, 'Terjadi masalah!')
-                    return JsonResponse({"instance": "Ada yang salah"}, status=200)
             except:
                 messages.success(request, 'Username sudah pernah digunakan!')
-                return JsonResponse({"instance": "Ada yang salah"}, status=200)
         else:
             messages.success(request, 'Tidak boleh kosong!')
 

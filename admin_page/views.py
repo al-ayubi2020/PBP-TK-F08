@@ -204,13 +204,10 @@ def register(request):
                     return redirect('admin_page:login_user')
                 else:
                     messages.success(request, 'Terjadi masalah!')
-                    return JsonResponse({"instance": "Ada yang salah"}, status=200)
             except:
                 messages.success(request, 'Username sudah pernah digunakan!')
-                return JsonResponse({"instance": "Ada yang salah"}, status=200)
         else:
             messages.success(request, 'Tidak boleh kosong!')
-            return JsonResponse({"instance": "Ada yang salah"}, status=200)
 
     context = {'form' : form}
     return render(request, 'register_admin.html', context)

@@ -57,6 +57,7 @@ Fitur ini merupakan laman  _user_ untuk menarik hadiah berupa uang tunai yang di
 - Menyetujui setoran sampah yang dilakukan oleh User
 - Membuat Hadiah yang dapat ditukarkan oleh User berdasarkan poinnya
 - Melihat statistik banyak pengguna total dan banyak setoran total <br>
+
 **User:** 
 - Melihat poin dan saldo yang dimiliki
 - Membuat permintaan setor sampah 

@@ -98,6 +98,6 @@ def use(request, id):
                     redeemedprize.save()
                 return JsonResponse({"instance": "Prize berhasil digunakan"}, status=200) 
             except:
-                return JsonResponse({"instance": "Prize berhasil digunakan"}, status=200) 
+                return JsonResponse({"instance": "Ada Masalah"}, status=200) 
         return redirect('prize:index')
     return redirect('/login/')

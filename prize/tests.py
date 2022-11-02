@@ -9,6 +9,8 @@ from project_django.roles import superUser, commonUser
 
 from admin_page.models import Prize
 
+from .views import *
+
 class TestPrize(TestCase):
 
     def setUp(self):
@@ -22,6 +24,7 @@ class TestPrize(TestCase):
         self.index = reverse('prize:index')
         self.index_redeem = reverse('prize:index_redeem')
         self.redeem = reverse('prize:redeem')
+        self.prize = reverse('prize:prize')
     
     def test_urls_index(self):
         response = self.c.get(self.index)
@@ -42,3 +45,20 @@ class TestPrize(TestCase):
     def test_urls_redeem_prize(self):
         response = self.c.post('/prize/redeem/useprize/1/')
         self.assertEquals(response.status_code , 200)
+
+    def test_urls_prize(self):
+        response = self.c.get(self.prize)
+        self.assertEquals(response.status_code , 200)
+    
+    def test_view_index(self):
+        self.assertEquals(resolve(self.index).func , index)
+
+    def test_view_index_redeem(self):
+        self.assertEquals(resolve(self.index_redeem).func , index_redeemed)
+
+    def test_view_redeem(self):
+        self.assertEquals(resolve(self.redeem).func , get_prize_redeem)
+
+    def test_view_prize(self):
+        self.assertEquals(resolve(self.prize).func , get_prize)
+

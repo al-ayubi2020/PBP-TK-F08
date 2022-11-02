@@ -3,7 +3,6 @@ from .views import index
 from .views import register
 from .views import login_user
 from .views import logout_user
-from .views import forbiden
 from .views import add_testimoni
 from .views import get_testimoni
 
@@ -16,5 +15,4 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('login/', login_user, name='login'),
     path('logout/', logout_user, name='logout'),
-    path('forbiden/', forbiden, name='forbiden'),
 ]

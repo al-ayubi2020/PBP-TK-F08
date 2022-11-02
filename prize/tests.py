@@ -62,3 +62,8 @@ class TestPrize(TestCase):
     def test_view_prize(self):
         self.assertEquals(resolve(self.prize).func , get_prize)
 
+    def test_template_index(self):
+        response = self.c.get(self.index)
+        self.assertEquals(response.status_code , 200)
+        self.assertTemplateUsed(response, 'index_prize.html')
+

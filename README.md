@@ -18,7 +18,7 @@ TrashSure hadir sebagai solusi digital untuk mengorganisir sampah secara efektif
 * Trisno Bayu Pamungkas - 2106702200
  
 ### ✨ Trash-sure ✨
--  [Tautan Aplikasi Heroku](https://trash-sure.herokuapp.com/)
+-  [Tautan Aplikasi Heroku](https://trashsure-pbp.herokuapp.com/)
  
 ### 📝 Cerita Aplikasi dan Manfaat 📝
 &emsp;&emsp;&emsp;Penumpukan limbah plastik dan elektronik kini sudah menjadi suatu fenomena yang cukup memprihatinkan. Data menyebutkan bahwa penggunaan sampah plastik di Indonesia mencapai 100 milyar kantong setiap tahunnya. Pengelolaan yang belum ditangani dengan baik serta minimnya aktivitas daur ulang berdampak pada penumpukan sampah yang tidak terkontrol. Padahal, optimalisasi daur ulang sampah elektronik di Indonesia dapat membantu perekonomian dengan perkiraan mencapai 1,8 miliar dollar AS.

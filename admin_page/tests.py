@@ -10,7 +10,7 @@ from .views import *
 
 # Create your tests here.
 
-class TestUrls(TestCase):
+class TestAdminPage(TestCase):
 
     def setUp(self):
         self.c = Client()
@@ -97,7 +97,7 @@ class TestUrls(TestCase):
     
     def test_post_register(self):
         self.a = Client()
-        response = self.a.post(self.register, {'username' : '', 'password' : '12345'})
+        response = self.a.post(self.register, {'username' : 'test1', 'password' : '12345'})
         self.assertEquals(response.status_code , 200)
 
     def test_view_index(self):

@@ -18,9 +18,6 @@ from project_django.roles import commonUser
 from .forms import LoginForm, RegisterForm, TestimoniForm
 from .models import Testimoni
 
-def forbiden(request):
-    return render(request, 'forbiden.html')
-
 def index(request):
     isLogin = str(request.user)
     user = request.user
@@ -48,8 +45,10 @@ def register(request):
                     return redirect('landing_page:login')
                 else:
                     messages.success(request, 'Terjadi masalah!')
+                    return JsonResponse({"instance": "Ada yang salah"}, status=200)
             except:
                 messages.success(request, 'Username sudah pernah digunakan!')
+                return JsonResponse({"instance": "Ada yang salah"}, status=200)
         else:
             messages.success(request, 'Tidak boleh kosong!')
 
@@ -88,13 +87,16 @@ def add_testimoni(request):
     if has_role(user, commonUser):
         form = TestimoniForm()
         if request.method == 'POST' and form.is_valid:
-            testi = Testimoni.objects.filter(user=user).count()
-            if testi == 0:
-                desc = request.POST.get('desc')
-                username = User.objects.get(username=user.username)
-                createTesti = Testimoni(desc=desc, user=user, username=username)
-                createTesti.save()
-                return JsonResponse({"instance": "Testimoni dibuat"}, status=200) 
-            return JsonResponse({"instance": "Sudah pernah memberikan testimoni"}, status=200) 
+            try:
+                testi = Testimoni.objects.filter(user=user).count()
+                if testi == 0:
+                    desc = request.POST.get('desc')
+                    username = User.objects.get(username=user.username)
+                    createTesti = Testimoni(desc=desc, user=user, username=username)
+                    createTesti.save()
+                    return JsonResponse({"instance": "Testimoni dibuat"}, status=200) 
+                return JsonResponse({"instance": "Sudah pernah memberikan testimoni"}, status=200) 
+            except:
+                return JsonResponse({"instance": "Ada yang salah"}, status=200)
         return redirect('landing_page:index')
     return redirect('/login/')

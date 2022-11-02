@@ -141,4 +141,36 @@ class TestUrls(TestCase):
     
     def test_view_logout_user(self):
         self.assertEquals(resolve(self.logout_user).func , logout_user)
+
+    def test_model_prize(self):
+        prizeTest = Prize.objects.get(nama='testasd')
+        self.assertEquals(prizeTest.nama, "testasd")
+
+    def test_model_userData(self):
+        userDataTest = UserData.objects.get(user=self.test2)
+        self.assertEquals(userDataTest.user, self.test2)
     
+    def test_template_index(self):
+        response = self.c.get(self.index)
+        self.assertEquals(response.status_code , 200)
+        self.assertTemplateUsed(response, 'index_admin.html')
+
+    def test_template_deposit(self):
+        response = self.c.get(self.deposit)
+        self.assertEquals(response.status_code , 200)
+        self.assertTemplateUsed(response, 'index_deposit_admin.html')
+
+    def test_template_prize(self):
+        response = self.c.get(self.prize)
+        self.assertEquals(response.status_code , 200)
+        self.assertTemplateUsed(response, 'index_prize_admin.html')
+
+    def test_template_login(self):
+        response = self.c.get(self.login_user)
+        self.assertEquals(response.status_code , 200)
+        self.assertTemplateUsed(response, 'login_admin.html')
+    
+    def test_template_register(self):
+        response = self.c.get(self.register)
+        self.assertEquals(response.status_code , 200)
+        self.assertTemplateUsed(response, 'register_admin.html')

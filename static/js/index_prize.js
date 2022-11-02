@@ -1,23 +1,29 @@
-function showPrizeRedeem(data) {
-  tab = ``;
+async function getPrize() {
+  return fetch("/prize/json/").then((res) => res.json()) // Get JSON data of Prize
+}
 
-  for (let r of data) {
-    tab += `
-      <div
-  class="card w-full md:w-80 lg:w-96 bg-[#A7CBD9] hover:bg-[#A7CBD9] text-black glass"
->
-  <div class="card-body">
-    <h2 class="card-title">${r.fields.nama}</h2>
-    <p class="">${r.fields.desc}</p>
-    <div class="card-actions justify-end">
-      <button class="btn btn-accent" onclick={use(${r.pk})}>Use</button>
-    </div>
-  </div>
-</div>
-    `;
-  }
+async function refresher() { // Update asynchronously
+  document.getElementById("prizes").innerHTML = ""
+  const prize = await getPrize()
 
-  document.getElementById("tableRedeem").innerHTML = tab;
+  let htmlString = ``
+
+  prize.forEach((item) => {
+    htmlString += `\n
+    <div class="card w-full md:w-80 lg:w-96 bg-[#A7CBD9] hover:bg-[#A7CBD9] text-black glass">
+      <div class="card-body">
+        <h2 class="card-title">${item.fields.nama}</h2>
+        <p class="stok">Stok: ${item.fields.stok}</p>
+        <p class="poin">Poin: ${item.fields.poin}</p>
+        <p class="desc">${item.fields.desc}</p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-error" onclick={redeemPrize(${item.pk})}>Redeem</button>
+        </div>
+      </div>
+    </div>`
+  });
+
+  document.getElementById("prizes").innerHTML = htmlString
 }
 
 function getCookie(name) {
@@ -38,92 +44,59 @@ function getCookie(name) {
 
 var csrftoken = getCookie("csrftoken");
 
-function loadDataRedeem() {
-  $.get("/prize/get_prize_redeem/", function (data) {
-    showPrizeRedeem(data);
-  });
-}
-
-function showPrize(data) {
-  tab = ``;
-
-  for (let r of data) {
-    tab += `
-      <div
-  class="card w-full md:w-80 lg:w-96 bg-[#A7CBD9] hover:bg-[#A7CBD9] text-black glass"
->
-  <div class="card-body">
-    <h2 class="card-title">${r.fields.nama}</h2>
-    <p class="">Stok: ${r.fields.stok}</p>
-    <p class="">Poin: ${r.fields.poin}</p>
-    <p class="">${r.fields.desc}</p>
-    <div class="card-actions justify-end">
-      <button class="btn btn-accent" onclick={redeem(${r.pk})}>Redeem</button>
-    </div>
-  </div>
-</div>
-    `;
+function redeemPrize(id) { // Redeem prize using AJAX
+  $.ajax({
+    type: "POST",
+    url: `redeem/${id}/`,
+    dataType: "json",
+    data: { csrfmiddlewaretoken: csrftoken },
+    success: function (data) {
+      refresher();
+      // How to implement pop-up message?
+      if (data.instance == "Berhasil Redeem") {
+        $.toast({ // Green messages if user can redeem the prize
+                  heading: 'Success',
+                  text: data.instance,
+                  bgColor: "#13970B",
+                  position: {
+                    right:30,
+                    top:80,
+                  },
+                  icon: 'success'
+              });
+      } else {
+        $.toast({ // Red messages if user can't redeem the prize
+                  heading: 'Failed',
+                  text: data.instance,
+                  bgColor: "#971E0B",
+                  position: {
+                    right:30,
+                    top:80,
+                  },
+                  icon:"info"
+              });
+      }
+    },
+    error: function(jqXHR, exception) {
+            if (jqXHR.status === 0) {
+                alert('Not connect.\n Verify Network.');
+            } else if (jqXHR.status == 404) {
+                alert('Requested page not found. [404]');
+            } else if (jqXHR.status == 500) {
+                alert('Internal Server Error [500].');
+            } else if (exception === 'parsererror') {
+                alert('Requested JSON parse failed.');
+            } else if (exception === 'timeout') {
+                alert('Time out error.');
+            } else if (exception === 'abort') {
+                alert('Ajax request aborted.');
+            } else {
+                alert('Uncaught Error.\n' + jqXHR.responseText);
+            }
+         },
+      })
   }
 
-  document.getElementById("table").innerHTML = tab;
-}
-
-function loadDataPrize() {
-  $.get("/prize/get_prize/", function (data) {
-    showPrize(data);
-  }).then(function () {
-    $.get("/prize/get_prize_redeem/", function (data) {
-      showPrizeRedeem(data);
-    });
-  });
-}
-
 $(document).ready(function () {
-  loadDataPrize();
+  refresher();
 });
-
-function redeem(id) {
-  $.ajax({
-    type: "POST",
-    url: `redeem/${id}`,
-    data: { csrfmiddlewaretoken: csrftoken },
-    dataType: "json",
-    success: function (data) {
-      loadDataPrize();
-      $.toast({
-        text: data.instance,
-        showHideTransition: "fade", // It can be plain, fade or slide
-        bgColor: "#23B65D", // Background color for toast
-        textColor: "#eee", // text color
-        allowToastClose: false, // Show the close button or not
-        hideAfter: 2000, // `false` to make it sticky or time in miliseconds to hide after
-        stack: 5, // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
-        textAlign: "left", // Alignment of text i.e. left, right, center
-        position: "bottom-right", // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
-      });
-    },
-  });
-}
-
-function use(id) {
-  $.ajax({
-    type: "POST",
-    url: `use/${id}`,
-    data: { csrfmiddlewaretoken: csrftoken },
-    dataType: "json",
-    success: function (data) {
-      loadDataRedeem();
-      $.toast({
-        text: data.instance,
-        showHideTransition: "fade", // It can be plain, fade or slide
-        bgColor: "#23B65D", // Background color for toast
-        textColor: "#eee", // text color
-        allowToastClose: false, // Show the close button or not
-        hideAfter: 2000, // `false` to make it sticky or time in miliseconds to hide after
-        stack: 5, // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
-        textAlign: "left", // Alignment of text i.e. left, right, center
-        position: "bottom-right", // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
-      });
-    },
-  });
-}

@@ -23,6 +23,14 @@ def index(request):
     return redirect('/login/')
 
 @login_required(login_url='/login/')
+def index_redeemed(request):
+    user = request.user
+    role = get_user_roles(user)
+    if(has_role(user, commonUser)):
+        return render(request, 'index_redeemed_prize.html')
+    return redirect('/login/')
+
+@login_required(login_url='/login/')
 def get_prize(request):
     user = request.user
     role = get_user_roles(user)
@@ -48,14 +56,27 @@ def redeem(request, id):
         if request.method == 'POST':
             prize = Prize.objects.get(pk=id)
             userdata = UserData.objects.get(user=user)
-            if prize.stok > 0:
-                if (userdata.poin >= prize.poin):
-                    redeemedprize = RedeemedPrize(nama=prize.nama, user=user, desc=prize.desc)
-                    redeemedprize.save()
-                    prize.stok -= 1
+            check_prize = RedeemedPrize.objects.filter(user=user, nama=prize.nama).first()
+            if prize.stok > 0: # Stok harus ada
+                if (userdata.poin >= prize.poin): # Poin harus cukup
+                    if(check_prize == None): # Berarti ini prize baru yang di-redeem sama user
+                        redeemedprize = RedeemedPrize(
+                            nama=prize.nama,
+                            user=user,
+                            desc=prize.desc
+                        )
+                        redeemedprize.save()
+                    else: # Berarti jenis prize ini udah pernah di-redeem sama user, kita cuma perlu update stok-nya aja
+                        redeemedprize = RedeemedPrize.objects.get(user=user, nama=prize.nama)
+                        redeemedprize.stok += 1
+                        redeemedprize.save()
+
+                    prize.stok -= 1 # Set stok prize setelah redeem
                     prize.save()
-                    userdata.poin -= prize.poin
+
+                    userdata.poin -= prize.poin # Kurangi poin user setelah redeem
                     userdata.save()
+
                     return JsonResponse({"instance": "Berhasil Redeem"}, status=200) 
                 return JsonResponse({"instance": "Poin Kurang"}, status=200) 
             return JsonResponse({"instance": "Stok Habis"}, status=200) 
@@ -68,10 +89,12 @@ def use(request, id):
     role = get_user_roles(user)
     if (has_role(user, commonUser)):
         if request.method == 'POST':
-            redeemedprize = RedeemedPrize.objects.get(pk=id)
-            if redeemedprize.user == user:
+            redeemedprize = RedeemedPrize.objects.get(user=user, pk=id) # Search redeemed prize
+            if redeemedprize.stok == 1: # If there's only 1 prize, it will be deleted from database
                 redeemedprize.delete()
-                return JsonResponse({"instance": "Berhasil Digunakan"}, status=200) 
-            return JsonResponse({"instance": "User Tidak Sesuai"}, status=200) 
+            else: # Stok redeemed prize lebih dari 1, berarti saat digunakan stok-nya akan berkurang
+                redeemedprize.stok -= 1
+                redeemedprize.save()
+            return JsonResponse({"instance": "Prize berhasil digunakan"}, status=200) 
         return redirect('prize:index')
     return redirect('/login/')

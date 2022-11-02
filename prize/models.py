@@ -5,5 +5,6 @@ from admin_page.models import Prize
 
 class RedeemedPrize(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    stok = models.BigIntegerField(default=1)
     nama = models.TextField()
     desc = models.TextField(default='')

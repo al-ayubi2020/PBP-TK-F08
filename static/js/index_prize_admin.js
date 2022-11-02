@@ -87,8 +87,8 @@ $(document).on("submit", "#buatproject", function (e) {
 function delData(id) {
   $.ajax({
     type: "POST",
-    url: `del/${id}`,
-    data: { csrfmiddlewaretoken: csrftoken },
+    url: `del/`,
+    data: { id: id, csrfmiddlewaretoken: csrftoken },
     dataType: "json",
     success: function () {
       loadData();

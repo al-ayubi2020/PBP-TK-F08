@@ -174,13 +174,14 @@ def get_prize(request):
     return redirect('/admin/login/')
 
 @login_required(login_url='/admin/login/')
-def del_prize(request, id):
+def del_prize(request):
     isLogin = str(request.user)
     user = request.user
     role = get_user_roles(user)
     if (has_role(user, superUser)):
         if request.method == 'POST':
-            prize = Prize.objects.get(pk=id)
+            idx = int(request.POST.get('id'))
+            prize = Prize.objects.get(pk=idx)
             prize.delete()
             return JsonResponse({"instance": "Deposit Diterima"}, status=200) 
         return redirect('admin_page:prize')

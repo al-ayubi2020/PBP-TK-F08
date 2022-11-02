@@ -5,6 +5,7 @@ from rolepermissions.roles import assign_role, get_user_roles
 from project_django.roles import superUser, commonUser
 from .models import UserData, Prize
 from deposit.models import Deposit
+from .views import *
 
 
 # Create your tests here.
@@ -20,6 +21,7 @@ class TestUrls(TestCase):
         assign_role(self.test2, commonUser)
         Deposit.objects.create(user=self.test2, username=self.test2.get_username(), jenisSampah="Plastik", beratSampah=1, isApprove='PENDING', poin=0, totalHarga=0)
         Deposit.objects.create(user=self.test2, username=self.test2.get_username(), jenisSampah="Plastik", beratSampah=1, isApprove='PENDING', poin=0, totalHarga=0)
+        Prize.objects.create(nama='testasd', poin=1, stok=1, desc='asdasd')
         self.c.force_login(self.test1)
         self.index = reverse('admin_page:index')
         self.deposit = reverse('admin_page:deposit')
@@ -31,7 +33,7 @@ class TestUrls(TestCase):
         self.prize = reverse('admin_page:prize')
         self.add_prize = reverse('admin_page:add_prize') # kerjain nanti
         self.get_prize = reverse('admin_page:get_prize')
-        # self.del_prize = reverse('/prize/del/1')
+        self.del_prize = reverse('admin_page:del_prize')
         self.login_user = reverse('admin_page:login_user')
         self.register = reverse('admin_page:register')
         self.logout_user = reverse('admin_page:logout_user')
@@ -52,16 +54,16 @@ class TestUrls(TestCase):
         response = self.c.get(self.get_deposit_count)
         self.assertEquals(response.status_code , 200)
     
-    def test_urls_add_deposit(self):
+    def test_post_add_deposit(self):
         test3 = User.objects.get(username=self.test2.get_username())
         response = self.c.post(self.add_deposit, {'username' : test3.get_username(), 'jenisSampah' : 'PLASTIK', 'beratSampah' : 0})
         self.assertEquals(response.status_code , 200)
     
-    def test_urls_del_deposit(self):
+    def test_post_del_deposit(self):
         response = self.c.post(self.del_deposit, {'id' : 1})
         self.assertEquals(response.status_code , 200)
     
-    def test_urls_acc_deposit(self):
+    def test_post_acc_deposit(self):
         response = self.c.post(self.acc_deposit, {'id' : 2})
         self.assertEquals(response.status_code , 200)
 
@@ -69,16 +71,74 @@ class TestUrls(TestCase):
         response = self.c.get(self.prize)
         self.assertEquals(response.status_code , 200)
 
+    def test_post_add_prize(self):
+        response = self.c.post(self.add_prize, {'nama':'test', "poin": '1', "stok" : '1' , "desc" : 'asd'})
+        self.assertEquals(response.status_code , 200)
+
     def test_urls_get_prize(self):
         response = self.c.get(self.get_prize)
+        self.assertEquals(response.status_code , 200)
+
+    def test_post_del_prize(self):
+        response = self.c.post(self.del_prize, {'id': 1})
         self.assertEquals(response.status_code , 200)
 
     def test_urls_login_user(self):
         response = self.c.get(self.login_user)
         self.assertEquals(response.status_code , 200)
 
+    def test_post_login_user(self):
+        response = self.c.post(self.login_user, {'username' : 'test1', 'password' : '12345'})
+        self.assertEquals(response.status_code , 200)
+
     def test_urls_register(self):
         response = self.c.get(self.register)
         self.assertEquals(response.status_code , 200)
+    
+    def test_post_register(self):
+        self.a = Client()
+        response = self.a.post(self.register, {'username' : '', 'password' : '12345'})
+        self.assertEquals(response.status_code , 200)
 
+    def test_view_index(self):
+        self.assertEquals(resolve(self.index).func , index)
+    
+    def test_view_deposit(self):
+        self.assertEquals(resolve(self.deposit).func , index_deposit)
+    
+    def test_view_get_deposit(self):
+        self.assertEquals(resolve(self.get_deposit).func , get_deposit)
+
+    def test_view_get_deposit_count(self):
+        self.assertEquals(resolve(self.get_deposit_count).func , get_deposit_count)
+    
+    def test_view_add_deposit(self):
+        self.assertEquals(resolve(self.add_deposit).func , add_deposit)
+    
+    def test_view_del_deposit(self):
+        self.assertEquals(resolve(self.del_deposit).func , del_deposit2)
+
+    def test_view_acc_deposit(self):
+        self.assertEquals(resolve(self.acc_deposit).func , acc_deposit)
+    
+    def test_view_prize(self):
+        self.assertEquals(resolve(self.prize).func , index_prize)
+
+    def test_view_add_prize(self):
+        self.assertEquals(resolve(self.add_prize).func , add_prize)
+
+    def test_view_get_prize(self):
+        self.assertEquals(resolve(self.get_prize).func , get_prize)
+
+    def test_view_del_prize(self):
+        self.assertEquals(resolve(self.del_prize).func , del_prize)
+
+    def test_view_login_user(self):
+        self.assertEquals(resolve(self.login_user).func , login_user)
+
+    def test_view_register(self):
+        self.assertEquals(resolve(self.register).func , register)
+    
+    def test_view_logout_user(self):
+        self.assertEquals(resolve(self.logout_user).func , logout_user)
     

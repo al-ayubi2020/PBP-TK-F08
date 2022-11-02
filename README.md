@@ -1,7 +1,15 @@
-# Rancangan Proyek Tengah Semester
+# TrashSure
 [![Deploy][actions-badge]][commits-gh]
 [![Test][actions1-badge]][commits-gh]
 [![codecov](https://codecov.io/github/al-ayubi2020/PBP-TK-F08/branch/main/graph/badge.svg?token=US2852M2M9)](https://codecov.io/github/al-ayubi2020/PBP-TK-F08)
+
+TrashSure hadir sebagai solusi digital untuk mengorganisir sampah secara efektif dengan imbalan yang menarik!
+
+> Proyek ini dibuat untuk memenuhi tugas Proyek Tengah Semester (PTS)
+> pada mata kuliah Pemrograman Berbasis Platform (CSGE602022) yang
+> diselenggarakan oleh Fakultas Ilmu Komputer, Universitas Indonesia
+> pada Semester Gasal, Tahun Ajaran 2022/2023.
+
 ### 👋🏽 Kelompok F08 - PBP F 👋🏽
 * Aghniya Zhafira Urfa - 2106654164
 * Andresha Pradana - 2106651591
@@ -44,8 +52,21 @@ Fitur ini merupakan laman  _user_ untuk menarik hadiah berupa uang tunai yang di
 * Dikerjakan oleh Dhina Rotua Mutiara
  
 ### Role Pengguna dan Deskripsinya
-* **Admin:** Admin dapat menambahkan transaksi setoran bank sampah kepada user, serta menerima dan menolak permintaan withdraw.
-* **User:** User dapat menginput permintaan setor sampah, melihat history transaksi dan history withdraw, serta dapat melakukan withdraw.
+**Admin:** 
+- Menambahkan transaksi setoran bank sampah kepada User
+- Menyetujui setoran sampah yang dilakukan oleh User
+- Membuat Hadiah yang dapat ditukarkan oleh User berdasarkan poinnya
+- Melihat statistik banyak pengguna total dan banyak setoran total
+**User:** 
+- Melihat poin dan saldo yang dimiliki
+- Membuat permintaan setor sampah 
+- Melihat riwayat setoran beserta statusnya
+- Menarik saldo yang dia miliki
+- Melihat riwayat penarikan saldo
+- Menukarkan poin dengan hadiah-hadiah menarik
+- Melihat hadiah yang telah ditukar
+- Menggunakan hadiah yang sudah ditukar
+- Memberikan testimoni kepada website
  
 ### 🧑‍💻 Persona 🧑‍💻
 1. User yang __tidak__ melakukan __login__ aplikasi
@@ -53,7 +74,7 @@ Fitur ini merupakan laman  _user_ untuk menarik hadiah berupa uang tunai yang di
 * Dapat melihat testimoni dari aplikasi Trash-sure
  
 2. User yang melakukan __login__ aplikasi
-* Dapat merasakan seluruh fitur yang disediakan, baik fitur penyetoran sampah, Penukaran Poin, Penarikan Poin, serta dapat memberikan testimoni untuk aplikasi Trash-sure
+* Dapat merasakan seluruh fitur yang disediakan berdasarkan role yang sudah ditentukan.
  
 ### 💡 Referensi 💡
 - [Rancang Bangun _Dashboard Admin_ Pemantauan Berbasis Web di PT. Astra Graphia Information Technology](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiN7Oryxo_7AhVoD7cAHY9NDKYQFnoECAYQAw&url=https%3A%2F%2Fzenodo.org%2Frecord%2F1218677%2Ffiles%2FJurnal%2520Ferliesha%2520Yuni%2520Hartanti-4314111018.pdf&usg=AOvVaw2FXNuZbcQ-7JUM7Xm0UzAz)

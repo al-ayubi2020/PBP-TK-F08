@@ -1,4 +1,5 @@
 # Rancangan Proyek Tengah Semester
+[![Test and Deploy][actions-badge]][commits-gh]
 [![codecov](https://codecov.io/github/al-ayubi2020/PBP-TK-F08/branch/main/graph/badge.svg?token=US2852M2M9)](https://codecov.io/github/al-ayubi2020/PBP-TK-F08)
 ## Kelompok F-08 — PBP F
 ## Nama Applikasi : Trashsure

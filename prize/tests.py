@@ -7,10 +7,13 @@ from django.contrib.auth.models import User
 from rolepermissions.roles import assign_role, get_user_roles
 from project_django.roles import superUser, commonUser
 
-class TestUrls(TestCase):
+from admin_page.models import Prize
+
+class TestPrize(TestCase):
 
     def setUp(self):
         self.c = Client()
+        Prize.objects.create(nama="test", poin=1, stok=0, desc="test")
         self.test1 =  User.objects.create(username="test1", password='12345')
         self.test2 =  User.objects.create(username="test2", password='12345')
         assign_role(self.test1, superUser)
@@ -30,4 +33,12 @@ class TestUrls(TestCase):
 
     def test_urls_redeem(self):
         response = self.c.get(self.redeem)
+        self.assertEquals(response.status_code , 200)
+
+    def test_urls_redeem_prize(self):
+        response = self.c.post('/prize/redeem/1/')
+        self.assertEquals(response.status_code , 200)
+
+    def test_urls_redeem_prize(self):
+        response = self.c.post('/prize/redeem/useprize/1/')
         self.assertEquals(response.status_code , 200)

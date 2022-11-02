@@ -10,7 +10,7 @@ from .views import *
 
 # Create your tests here.
 
-class TestUrls(TestCase):
+class TestAdminPage(TestCase):
 
     def setUp(self):
         self.c = Client()

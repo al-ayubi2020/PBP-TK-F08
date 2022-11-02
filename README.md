@@ -36,7 +36,7 @@ Fitur ini merupakan metode keamanan yang diterapkan ketika seorang _user_ akan m
 * Dikerjakan oleh Andresha Pradana
  
 3. __Admin Dashboard__
-Admin dashboard merupakan pusat control panel ber-platform yang berfungsi untuk mengatur semua kegiatan di sebuah situs atau Website. Pada laman ini, admin dapat menambahkan transaksi setoran bank sampah kepada user, serta menerima dan menolak permintaan withdraw.
+Admin dashboard merupakan pusat control panel ber-platform yang berfungsi untuk mengatur semua kegiatan di sebuah situs atau Website. Pada laman ini, admin dapat melihat jumlah pengguna aplikasi Trash-sure dan total deposit, serta menambahkan transaksi setoran bank sampah milik user.
 * Dikerjakan oleh Muhammad Hilman Al Ayubi
  
 4. __Add and History Deposit on User Dashboard__
@@ -48,12 +48,12 @@ Fitur ini merupakan laman untuk menukarkan poin yang telah dikumpulkan oleh _use
 * Dikerjakan oleh Trisno Bayu Pamungkas
  
 6. __Add and History Withdraw on User Dashboard__
-Fitur ini merupakan laman  _user_ untuk menarik hadiah berupa uang tunai yang didapatkan dari pengumpulan poin setelah melakukan penyetoran sampah. Setiap kali _user_ melakukan penarikan, akan tercatat jumlah penarikan serta tanggal saay penarikan.
+Fitur ini merupakan laman  _user_ untuk menarik hadiah berupa uang tunai yang didapatkan dari pengumpulan poin setelah melakukan penyetoran sampah. Setiap kali _user_ melakukan penarikan, akan tercatat jumlah penarikan serta tanggal saat penarikan.
 * Dikerjakan oleh Dhina Rotua Mutiara
  
 ### Role Pengguna dan Deskripsinya
 **Admin:** 
-- Menambahkan transaksi setoran bank sampah kepada User
+- Menambahkan transaksi setoran bank sampah milik User
 - Menyetujui setoran sampah yang dilakukan oleh User
 - Membuat Hadiah yang dapat ditukarkan oleh User berdasarkan poinnya
 - Melihat statistik banyak pengguna total dan banyak setoran total <br>

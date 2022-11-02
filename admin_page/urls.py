@@ -8,11 +8,11 @@ from .views import login_user
 from .views import logout_user
 from .views import register
 from .views import acc_deposit
-from .views import del_deposit
 from .views import add_deposit
 from .views import add_prize
 from .views import get_prize
 from .views import del_prize
+from .views import del_deposit2
 
 
 app_name = 'admin_page'
@@ -23,8 +23,8 @@ urlpatterns = [
     path('deposit/get/', get_deposit, name='get_deposit'),
     path('deposit/get/count/', get_deposit_count, name='get_deposit_count'),
     path('deposit/add/', add_deposit, name='add_deposit'),
-    path('deposit/del/<int:id>', del_deposit, name='del_deposit'),
-    path('deposit/acc/<int:id>', acc_deposit, name='acc_deposit'),
+    path('deposit/del/', del_deposit2, name='del_deposit2'),
+    path('deposit/acc/', acc_deposit, name='acc_deposit'),
     path('prize/', index_prize, name='prize'),
     path('prize/add', add_prize, name='add_prize'),
     path('prize/get', get_prize, name='get_prize'),

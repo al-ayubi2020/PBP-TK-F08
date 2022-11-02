@@ -100,13 +100,14 @@ def add_deposit(request):
     return redirect('/admin/login/')
 
 @login_required(login_url='/admin/login/')
-def acc_deposit(request, id):
+def acc_deposit(request):
     isLogin = str(request.user)
     user = request.user
     role = get_user_roles(user)
     if (has_role(user, superUser)):
         if request.method == 'POST':
-            deposit = Deposit.objects.get(pk=id)
+            idx = int(request.POST.get('id'))
+            deposit = Deposit.objects.get(pk=idx)
             deposit.isApprove = "DITERIMA"
             deposit.save()
             userdata = UserData.objects.get(user=deposit.user)
@@ -118,13 +119,14 @@ def acc_deposit(request, id):
     return redirect('/admin/login/')
 
 @login_required(login_url='/admin/login/')
-def del_deposit(request, id):
+def del_deposit2(request):
     isLogin = str(request.user)
     user = request.user
     role = get_user_roles(user)
     if (has_role(user, superUser)):
         if request.method == 'POST':
-            deposit = Deposit.objects.get(pk=id)
+            idx = int(request.POST.get('id'))
+            deposit = Deposit.objects.get(pk=idx)
             deposit.isApprove = "DITOLAK"
             deposit.save()
             return JsonResponse({"instance": "Deposit Dihapus"}, status=200) 

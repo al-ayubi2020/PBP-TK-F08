@@ -3,56 +3,56 @@ function show(data) {
 
   for (let r of data) {
     tab += `
-        <div
-    class="card w-full md:w-80 lg:w-96 bg-[#B6C790] hover:bg-[#B6C790] text-black glass"
-  >
-    <div class="card-body">
-      <h2 class="card-title">${r.fields.date}</h2>
-      <p class="font-bold">Username: ${r.fields.username}</p>
-      <div class="flex w-fit gap-2">
-        <p class="font-bold w-fit">${r.fields.jenisSampah}</p>
-        <p class="font-bold w-fit">${r.fields.beratSampah} Kg</p>
-      </div>
-      <p class="font-bold">Poin: ${r.fields.poin}</p>
-      <p class="font-bold">Saldo: ${r.fields.totalHarga}</p>
-      <div class="card-actions justify-end">
-        <button class="btn btn-success btn-circle" onclick={accData(${r.pk})}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M4.5 12.75l6 6 9-13.5"
-            />
-          </svg>
-        </button>
-        <button class="btn btn-error btn-circle" onclick={delData(${r.pk})}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
+          <div
+      class="card w-full md:w-80 lg:w-96 bg-[#B6C790] hover:bg-[#B6C790] text-black glass"
+    >
+      <div class="card-body">
+        <h2 class="card-title">${r.fields.date}</h2>
+        <p class="font-bold">Username: ${r.fields.username}</p>
+        <div class="flex w-fit gap-2">
+          <p class="font-bold w-fit">${r.fields.jenisSampah}</p>
+          <p class="font-bold w-fit">${r.fields.beratSampah} Kg</p>
+        </div>
+        <p class="font-bold">Poin: ${r.fields.poin}</p>
+        <p class="font-bold">Saldo: ${r.fields.totalHarga}</p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-success btn-circle" onclick={accData(${r.pk})}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4.5 12.75l6 6 9-13.5"
+              />
+            </svg>
+          </button>
+          <button class="btn btn-error btn-circle" onclick={delData(${r.pk})}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-
-      `;
+  
+        `;
   }
 
   document.getElementById("table").innerHTML = tab;
@@ -163,8 +163,8 @@ $(document).on("submit", "#buatproject", function (e) {
 function accData(id) {
   $.ajax({
     type: "POST",
-    url: `acc/${id}`,
-    data: { csrfmiddlewaretoken: csrftoken },
+    url: `acc/`,
+    data: { id: id, csrfmiddlewaretoken: csrftoken },
     dataType: "json",
     success: function () {
       loadData();

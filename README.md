@@ -1,6 +1,5 @@
 # Rancangan Proyek Tengah Semester
 [![Test and Deploy][actions-badge]][commits-gh]
-
 [![codecov](https://codecov.io/github/al-ayubi2020/PBP-TK-F08/branch/main/graph/badge.svg?token=US2852M2M9)](https://codecov.io/github/al-ayubi2020/PBP-TK-F08)
 ## Kelompok F-08 — PBP F
 ## Nama Applikasi : Trashsure
@@ -30,3 +29,6 @@ Fitur-fitur aplikasi Bank Sampah:
 ### Role Pengguna dan Deskripsinya
 * **Admin:** Admin dapat menambahkan transaksi setoran bank sampah kepada user, serta menerima dan menolak permintaan withdraw.
 * **User:** User dapat menginput permintaan setor sampah, melihat history transaksi dan history withdraw, serta dapat melakukan withdraw.
+
+[actions-badge]: https://github.com/UI-HealCast/UIHealCastF11/actions/workflows/dpl.yml/badge.svg
+[commits-gh]: https://github.com/UI-HealCast/UIHealCastF11/commits/main

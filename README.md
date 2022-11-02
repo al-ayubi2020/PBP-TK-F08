@@ -30,5 +30,5 @@ Fitur-fitur aplikasi Bank Sampah:
 * **Admin:** Admin dapat menambahkan transaksi setoran bank sampah kepada user, serta menerima dan menolak permintaan withdraw.
 * **User:** User dapat menginput permintaan setor sampah, melihat history transaksi dan history withdraw, serta dapat melakukan withdraw.
 
-[actions-badge]: https://github.com/UI-HealCast/UIHealCastF11/actions/workflows/dpl.yml/badge.svg
-[commits-gh]: https://github.com/UI-HealCast/UIHealCastF11/commits/main
+[actions-badge]: https://github.com/al-ayubi2020/PBP-TK-F08/actions/workflows/dpl.yml/badge.svg
+[commits-gh]: https://github.com/al-ayubi2020/PBP-TK-F08/commits/main

@@ -1,19 +1,21 @@
+# import django utils
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from rolepermissions.decorators import has_role_decorator
-from project_django.roles import commonUser
-from rolepermissions.roles import assign_role, get_user_roles
-from rolepermissions.checkers import has_role
 from django.http.response import JsonResponse
 from django.core import serializers
-from django.urls import reverse
-from django.http import HttpResponse, HttpResponseRedirect
-import math
+from django.http import HttpResponse
 
+# import role utils
+from project_django.roles import commonUser
+from rolepermissions.roles import get_user_roles
+from rolepermissions.checkers import has_role
+
+# import models
 from deposit.models import Deposit
 from admin_page.models import UserData
 
-from .forms import DepositForm
+# import forms
+from .forms import *
 
 @login_required(login_url='/login/')
 def index(request):

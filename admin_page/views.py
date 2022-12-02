@@ -1,26 +1,24 @@
+# import django utils
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.core import serializers
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.http.response import JsonResponse
-import datetime
 
+# import role utils
 from rolepermissions.roles import assign_role, get_user_roles
-from project_django.roles import superUser
-from rolepermissions.decorators import has_role_decorator
 from project_django.roles import superUser
 from rolepermissions.checkers import has_role
 
+# import models
+from django.contrib.auth.models import User
 from deposit.models import Deposit
-from prize.models import Prize
+from admin_page.models import Prize, UserData
 
-from admin_page.models import UserData
-
+# import forms
 from .forms import *
 
 @login_required(login_url='/admin/login/')

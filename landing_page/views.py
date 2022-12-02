@@ -1,22 +1,25 @@
+# import django utils
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.core import serializers
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.http.response import JsonResponse
-import datetime
-from admin_page.models import UserData
-from rolepermissions.checkers import has_role
 
+# import role utils
+from rolepermissions.checkers import has_role
 from rolepermissions.roles import assign_role, get_user_roles
 from project_django.roles import commonUser
 
-from .forms import LoginForm, RegisterForm, TestimoniForm
-from .models import Testimoni
+# import models
+from admin_page.models import UserData
+from django.contrib.auth.models import User
+from landing_page.models import Testimoni
+
+# import forms
+from .forms import *
 
 def index(request):
     isLogin = str(request.user)

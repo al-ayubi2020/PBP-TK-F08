@@ -1,18 +1,19 @@
+# import django utils
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from rolepermissions.decorators import has_role_decorator
+from django.http.response import JsonResponse
+from django.core import serializers
+from django.http import HttpResponse
+
+# import role utils
 from project_django.roles import commonUser
 from rolepermissions.roles import assign_role, get_user_roles
 from rolepermissions.checkers import has_role
-from django.http.response import JsonResponse
-from django.core import serializers
-from django.urls import reverse
-from django.http import HttpResponse, HttpResponseRedirect
 
+# impport models
 from admin_page.models import Prize
-from .models import RedeemedPrize
+from prize.models import RedeemedPrize
 from admin_page.models import UserData
-
 
 @login_required(login_url='/login/')
 def index(request):

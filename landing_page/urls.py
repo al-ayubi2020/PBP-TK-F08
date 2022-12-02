@@ -1,10 +1,5 @@
 from django.urls import path
-from .views import index
-from .views import register
-from .views import login_user
-from .views import logout_user
-from .views import add_testimoni
-from .views import get_testimoni
+from .views import *
 
 app_name = 'landing_page'
 

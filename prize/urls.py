@@ -1,10 +1,5 @@
 from django.urls import path
-from .views import index
-from .views import index_redeemed
-from .views import redeem
-from .views import get_prize
-from .views import get_prize_redeem
-from .views import use
+from .views import *
 
 app_name = 'prize'
 

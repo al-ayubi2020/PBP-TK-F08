@@ -1,7 +1,5 @@
 from django.urls import path
-from .views import index
-from .views import add
-from .views import get
+from .views import *
 
 app_name = 'withdraw'
 

@@ -1,19 +1,5 @@
 from django.urls import path
-from .views import index
-from .views import index_deposit
-from .views import get_deposit
-from .views import get_deposit_count
-from .views import index_prize
-from .views import login_user
-from .views import logout_user
-from .views import register
-from .views import acc_deposit
-from .views import add_deposit
-from .views import add_prize
-from .views import get_prize
-from .views import del_prize
-from .views import del_deposit2
-
+from .views import *
 
 app_name = 'admin_page'
 

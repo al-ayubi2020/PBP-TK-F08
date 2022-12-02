@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'landing_page',
     'admin_page',
     'user_dashboard',
-    'rolepermissions'
+    'rolepermissions',
+    'flutter'
 ]
 
 TAILWIND_APP_NAME = 'theme'

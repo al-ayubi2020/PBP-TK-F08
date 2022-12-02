@@ -8,8 +8,7 @@ urlpatterns = [
     # auth
     path('register/', register, name='register'),
     path('login/', login, name='login'),
-    path('logout/', logout, name='logout'),
-    path('logout/', logout, name='logout'),
+    path('logout/', logout_user, name='logout_user'),
 
     # admin
     path('admin/username/get/', admin_get_username, name='admin_get_username'),
@@ -23,6 +22,7 @@ urlpatterns = [
     path('admin/prize/del/', admin_del_prize, name='admin_del_prize'),
     
     # user
+    path('user/data/get/', user_get_data, name='user_get_data'),
     path('user/prize/get/', user_get_prize, name='user_get_prize'),
     path('user/prize/redeem/get/', user_get_prize_redeem, name='user_get_prize_redeem'),
     path('user/prize/redeem/', user_redeem_prize, name='user_redeem_prize'),

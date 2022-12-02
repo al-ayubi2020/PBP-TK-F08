@@ -65,7 +65,7 @@ def login(request):
     return JsonResponse({"message": "Method not allowed", 'status':502}, status=502)
 
 @csrf_exempt
-def logout(request):
+def logout_user(request):
     logout(request)
     return JsonResponse({"instance": "Berhasil logout", 'status':200}, status=200)
     
@@ -369,6 +369,15 @@ def user_add_testimoni(request):
                 return JsonResponse({"message": "Ada yang salah", 'status':500}, status=500)
         return JsonResponse({"instance": "Method not allowed", "status":502}, status=502)
     return JsonResponse({ "instance": "Belum login!" , "status":403}, status=403)
+
+@csrf_exempt
+def user_get_data(request):
+    user = request.user
+    role = get_user_roles(user)
+    if (has_role(user, commonUser)):
+        userdata = UserData.objects.filter(user=user)
+        return HttpResponse(serializers.serialize("json", userdata), content_type="application/json")
+    return JsonResponse({ "message": "Belum login!" }, status=403)
 
 
 

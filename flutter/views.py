@@ -65,12 +65,12 @@ def login(request):
     return JsonResponse({"message": "Method not allowed", 'status':502}, status=502)
 
 @csrf_exempt
-def logout_user(request):
+def logout(request):
     logout(request)
     return JsonResponse({"instance": "Berhasil logout", 'status':200}, status=200)
     
 @csrf_exempt
-def get_username(request):
+def admin_get_username(request):
     isLogin = str(request.user)
     user = request.user
     role = get_user_roles(user)

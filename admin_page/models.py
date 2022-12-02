@@ -11,5 +11,6 @@ class Prize(models.Model):
 
 class UserData(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    email = models.TextField(default="")
     poin = models.BigIntegerField(default=0)
     balance = models.BigIntegerField(default=0)

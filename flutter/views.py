@@ -297,8 +297,8 @@ def user_add_withdraw(request):
                     userdata.balance -= jumlah
                     userdata.save()
                     return JsonResponse({"message": "Penarikan Berhasil", 'status':200}, status=200) 
-                return JsonResponse({"message": "Saldo Kurang", 'status':200}, status=200) 
-            return JsonResponse({"message": "Input tidak valid", 'status':200}, status=200) 
+                return JsonResponse({"message": "Saldo Kurang", 'status':300}, status=200) 
+            return JsonResponse({"message": "Input tidak valid", 'status':300}, status=200) 
         return JsonResponse({"message": "Method not allowed", 'status':502}, status=502)
     return JsonResponse({ "message": "Belum login!" , 'status':403}, status=403)
 

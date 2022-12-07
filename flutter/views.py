@@ -67,7 +67,7 @@ def login(request):
 @csrf_exempt
 def logout_user(request):
     logout(request)
-    return JsonResponse({"instance": "Berhasil logout", 'status':200}, status=200)
+    return JsonResponse({"message": "Berhasil logout", 'status':200}, status=200)
     
 @csrf_exempt
 def admin_get_username(request):
@@ -77,7 +77,7 @@ def admin_get_username(request):
     if (has_role(user, superUser)):
         pending = UserData.objects.all().order_by('-pk')
         return HttpResponse(serializers.serialize("json", pending), content_type="application/json")
-    return JsonResponse({ "instance": "Belum login!" }, status=403)
+    return JsonResponse({ "message": "Belum login!" }, status=403)
 
 @csrf_exempt
 def admin_get_deposit(request):
@@ -87,7 +87,7 @@ def admin_get_deposit(request):
     if (has_role(user, superUser)):
         pending = Deposit.objects.filter(isApprove="PENDING").order_by('-pk')
         return HttpResponse(serializers.serialize("json", pending), content_type="application/json")
-    return JsonResponse({ "instance": "Belum login!" }, status=403)
+    return JsonResponse({ "message": "Belum login!" }, status=403)
 
 @csrf_exempt
 def admin_get_deposit_count(request):
@@ -98,7 +98,7 @@ def admin_get_deposit_count(request):
         pending = Deposit.objects.filter(isApprove="PENDING").count()
         tes = [pending]
         return HttpResponse(tes)
-    return JsonResponse({ "instance": "Belum login!" }, status=403)
+    return JsonResponse({ "message": "Belum login!" }, status=403)
 
 @csrf_exempt
 def admin_add_deposit(request):
@@ -126,10 +126,10 @@ def admin_add_deposit(request):
                 userdata.poin += poin
                 userdata.balance += totalHarga
                 userdata.save()
-                return JsonResponse({"instance": "Deposit diajukan" ,"status":200}, status=200) 
-            return JsonResponse({ "instance": "Input tidak valid", "status":400}, status=400)
-        return JsonResponse({"instance": "Method not allowed", "status":502}, status=502)
-    return JsonResponse({ "instance": "Belum login!" , "status":403}, status=403)
+                return JsonResponse({"message": "Deposit diajukan" ,"status":200}, status=200) 
+            return JsonResponse({ "message": "Input tidak valid", "status":400}, status=400)
+        return JsonResponse({"message": "Method not allowed", "status":502}, status=502)
+    return JsonResponse({ "message": "Belum login!" , "status":403}, status=403)
 
 @csrf_exempt
 def admin_acc_deposit(request):
@@ -146,9 +146,9 @@ def admin_acc_deposit(request):
             userdata.balance += deposit.totalHarga
             userdata.poin += deposit.poin
             userdata.save()
-            return JsonResponse({"instance": "Deposit Diterima", 'status':200}, status=200) 
-        return JsonResponse({"instance": "Method not allowed", 'status':502}, status=502)
-    return JsonResponse({ "instance": "Belum login!", 'status':403 }, status=403)
+            return JsonResponse({"message": "Deposit Diterima", 'status':200}, status=200) 
+        return JsonResponse({"message": "Method not allowed", 'status':502}, status=502)
+    return JsonResponse({ "message": "Belum login!", 'status':403 }, status=403)
 
 @csrf_exempt
 def admin_del_deposit(request):
@@ -161,9 +161,9 @@ def admin_del_deposit(request):
             deposit = Deposit.objects.get(pk=idx)
             deposit.isApprove = "DITOLAK"
             deposit.save()
-            return JsonResponse({"instance": "Deposit Dihapus", 'status':200}, status=200) 
-        return JsonResponse({"instance": "Method not allowed", 'status':502}, status=502)
-    return JsonResponse({ "instance": "Belum login!" , 'status':403}, status=403)
+            return JsonResponse({"message": "Deposit Dihapus", 'status':200}, status=200) 
+        return JsonResponse({"message": "Method not allowed", 'status':502}, status=502)
+    return JsonResponse({ "message": "Belum login!" , 'status':403}, status=403)
 
 @csrf_exempt
 def admin_add_prize(request):
@@ -179,10 +179,10 @@ def admin_add_prize(request):
             if (poin > 0 and stok > 0):
                 prize = Prize(nama=nama, poin=poin, stok=stok, desc=desc)
                 prize.save()
-                return JsonResponse({"instance": "Prize Dibuat", 'status':200}, status=200) 
-            return JsonResponse({"instance": "Poin dan Stok tidak boleh 0", 'status':200}, status=200) 
-        return JsonResponse({"instance": "Method not allowed", 'status':502}, status=502)
-    return JsonResponse({ "instance": "Belum login!" , "status":403}, status=403)
+                return JsonResponse({"message": "Prize Dibuat", 'status':200}, status=200) 
+            return JsonResponse({"message": "Poin dan Stok tidak boleh 0", 'status':200}, status=200) 
+        return JsonResponse({"message": "Method not allowed", 'status':502}, status=502)
+    return JsonResponse({ "message": "Belum login!" , "status":403}, status=403)
 
 @csrf_exempt
 def admin_get_prize(request):
@@ -192,7 +192,7 @@ def admin_get_prize(request):
     if (has_role(user, superUser)):
         prize = Prize.objects.all().order_by('-pk')
         return HttpResponse(serializers.serialize("json", prize), content_type="application/json")
-    return JsonResponse({ "instance": "Belum login!" }, status=403)
+    return JsonResponse({ "message": "Belum login!" }, status=403)
 
 @csrf_exempt
 def admin_del_prize(request):
@@ -204,9 +204,9 @@ def admin_del_prize(request):
             idx = int(request.POST.get('id'))
             prize = Prize.objects.get(pk=idx)
             prize.delete()
-            return JsonResponse({"instance": "Deposit Diterima", 'status':200}, status=200) 
-        return JsonResponse({"instance": "Method not allowed", 'status':502}, status=502)
-    return JsonResponse({ "instance": "Belum login!", 'status':403}, status=403)
+            return JsonResponse({"message": "Deposit Diterima", 'status':200}, status=200) 
+        return JsonResponse({"message": "Method not allowed", 'status':502}, status=502)
+    return JsonResponse({ "message": "Belum login!", 'status':403}, status=403)
 
 @csrf_exempt
 def user_get_prize(request):
@@ -340,10 +340,10 @@ def user_add_deposit(request):
                 poin = totalHarga // 1000
                 deposit = Deposit(beratSampah=beratSampah, jenisSampah=jenisSampah, totalHarga=totalHarga, poin=poin, user=user, username=user.username, isApprove="PENDING")
                 deposit.save()
-                return JsonResponse({"instance": "Deposit diajukan" ,"status":200}, status=200) 
-            return JsonResponse({ "instance": "Input tidak valid", "status":400}, status=400)
-        return JsonResponse({"instance": "Method not allowed", "status":502}, status=502)
-    return JsonResponse({ "instance": "Belum login!" , "status":403}, status=403)
+                return JsonResponse({"message": "Deposit diajukan" ,"status":200}, status=200) 
+            return JsonResponse({ "message": "Input tidak valid", "status":400}, status=400)
+        return JsonResponse({"message": "Method not allowed", "status":502}, status=502)
+    return JsonResponse({ "message": "Belum login!" , "status":403}, status=403)
 
 @csrf_exempt
 def get_testimoni(request):
@@ -364,11 +364,11 @@ def user_add_testimoni(request):
                     createTesti = Testimoni(desc=desc, user=user, username=username)
                     createTesti.save()
                     return JsonResponse({"message": "Testimoni dibuat", 'status':200}, status=200) 
-                return JsonResponse({"message": "Sudah pernah memberikan testimoni", 'status':200}, status=200) 
+                return JsonResponse({"message": "Sudah pernah memberikan testimoni", 'status':300}, status=200) 
             except:
                 return JsonResponse({"message": "Ada yang salah", 'status':500}, status=500)
-        return JsonResponse({"instance": "Method not allowed", "status":502}, status=502)
-    return JsonResponse({ "instance": "Belum login!" , "status":403}, status=403)
+        return JsonResponse({"message": "Method not allowed", "status":502}, status=502)
+    return JsonResponse({ "message": "Belum login atau bukan user!" , "status":403}, status=403)
 
 @csrf_exempt
 def user_get_data(request):
@@ -379,6 +379,14 @@ def user_get_data(request):
         return HttpResponse(serializers.serialize("json", userdata), content_type="application/json")
     return JsonResponse({ "message": "Belum login!" }, status=403)
 
-
+@csrf_exempt
+def get_is_user(request):
+    user = request.user
+    role = get_user_roles(user)
+    if (has_role(user, commonUser)):
+        print(user)
+        return JsonResponse({ "isUser": "true" }, status=200)
+    print(user)
+    return JsonResponse({ "isUser": "false" }, status=200)
 
 

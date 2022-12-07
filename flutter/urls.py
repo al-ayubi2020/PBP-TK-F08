@@ -35,5 +35,5 @@ urlpatterns = [
     
     # all
     path('testimoni/get/', get_testimoni, name='get_testimoni'),
-
+    path('is-user/', get_is_user, name='get_is_user'),
 ]

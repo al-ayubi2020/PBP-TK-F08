@@ -42,7 +42,7 @@ def register(request):
             except:
                 return JsonResponse({ "status": 406, "message": "Username sudah pernah digunakan." }, status=406)
         else:
-            return JsonResponse({ "status": 400, "message": "username dan password boleh kosong" }, status=400)
+            return JsonResponse({ "status": 400, "message": "username dan password tidak boleh kosong" }, status=400)
     return JsonResponse({"status": 502, "message": "Method not allowed"}, status=502)
 
 @csrf_exempt

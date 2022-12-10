@@ -1,8 +1,4 @@
 # TrashSure
-[![Deploy][actions-badge]][commits-gh]
-[![Test][actions1-badge]][commits-gh]
-[![codecov](https://codecov.io/github/al-ayubi2020/PBP-TK-F08/branch/main/graph/badge.svg?token=US2852M2M9)](https://codecov.io/github/al-ayubi2020/PBP-TK-F08)
-
 TrashSure hadir sebagai solusi digital untuk mengorganisir sampah secara efektif dengan imbalan yang menarik!
 
 > Proyek ini dibuat untuk memenuhi tugas Proyek Tengah Semester (PTS)
@@ -79,8 +75,3 @@ Fitur ini merupakan laman  _user_ untuk menarik hadiah berupa uang tunai yang di
  
 ### 💡 Referensi 💡
 - [Rancang Bangun _Dashboard Admin_ Pemantauan Berbasis Web di PT. Astra Graphia Information Technology](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiN7Oryxo_7AhVoD7cAHY9NDKYQFnoECAYQAw&url=https%3A%2F%2Fzenodo.org%2Frecord%2F1218677%2Ffiles%2FJurnal%2520Ferliesha%2520Yuni%2520Hartanti-4314111018.pdf&usg=AOvVaw2FXNuZbcQ-7JUM7Xm0UzAz)
-
-
-[actions-badge]: https://github.com/al-ayubi2020/PBP-TK-F08/actions/workflows/dpl.yml/badge.svg
-[actions1-badge]: https://github.com/al-ayubi2020/PBP-TK-F08/actions/workflows/test.yml/badge.svg
-[commits-gh]: https://github.com/al-ayubi2020/PBP-TK-F08/commits/main

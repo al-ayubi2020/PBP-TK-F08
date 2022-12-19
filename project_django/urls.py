@@ -25,5 +25,4 @@ urlpatterns = [
     path('deposit/', include('deposit.urls')),
     path('admin/', include('admin_page.urls')),
     path('flutter/', include('flutter.urls')),
-    path("__reload__/", include("django_browser_reload.urls")),
 ]

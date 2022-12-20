@@ -30,7 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-CSRF_TRUSTED_ORIGINS = ['https://*.iyoubee.xyz','https://*.127.0.0.1','https://trashsure-django-production.up.railway.app/','https://*']
+CSRF_TRUSTED_ORIGINS = ['https://*.iyoubee.xyz','https://*.127.0.0.1','https://trashsure-django-production.up.railway.app','https://*']
 # Application definition
 
 INSTALLED_APPS = [
